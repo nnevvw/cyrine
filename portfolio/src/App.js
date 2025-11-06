@@ -29,7 +29,7 @@ function App() {
   return (
     <div className="App">
       <img 
-        src={`${process.env.PUBLIC_URL}/violet.jpg`}
+        src={`${process.env.PUBLIC_URL}/violet.png`}
         alt="Background" 
         className="App-background" 
       />
