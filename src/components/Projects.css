@@ -1,0 +1,348 @@
+.projects-inner {
+  display: flex;
+  flex-direction: column;
+  gap: clamp(18px, 2.6vh, 34px);
+  min-height: 0;
+}
+
+/* --- En-tête : titre à gauche, filtres et flèches à droite ----------- */
+
+.projects-head {
+  display: flex;
+  align-items: flex-end;
+  justify-content: space-between;
+  gap: 28px;
+  flex-wrap: wrap;
+}
+
+.projects-controls {
+  display: flex;
+  align-items: center;
+  gap: 16px;
+  flex-wrap: wrap;
+}
+
+.filters {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+}
+
+.filter {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  padding: 9px 16px;
+  border-radius: var(--r-pill);
+  border: 1px solid var(--line);
+  background: var(--surface);
+  font-size: 14px;
+  color: var(--ink-soft);
+  box-shadow: var(--shadow-sm);
+  transition: transform 0.3s var(--ease), border-color 0.3s var(--ease),
+    color 0.3s var(--ease), background 0.3s var(--ease), box-shadow 0.3s var(--ease);
+}
+
+.filter:hover { border-color: var(--lilac-300); color: var(--ink); transform: translateY(-2px); }
+
+.filter.is-on {
+  background: linear-gradient(120deg, var(--lilac-400), var(--pink-300));
+  border-color: transparent;
+  color: #fff;
+  box-shadow: 0 8px 20px rgba(171, 134, 245, 0.34);
+}
+
+.filter-count {
+  font-family: var(--font-mono);
+  font-size: 11px;
+  padding: 1px 7px;
+  border-radius: var(--r-pill);
+  background: var(--lilac-50);
+  color: var(--lilac-600);
+  transition: background 0.3s var(--ease), color 0.3s var(--ease);
+}
+
+.filter.is-on .filter-count {
+  background: rgba(255, 255, 255, 0.28);
+  color: #fff;
+}
+
+.rail-arrows { display: flex; gap: 8px; }
+
+.arrow {
+  width: 40px;
+  height: 40px;
+  display: grid;
+  place-items: center;
+  border-radius: 50%;
+  border: 1px solid var(--line-strong);
+  background: var(--surface);
+  box-shadow: var(--shadow-sm);
+  transition: transform 0.3s var(--ease), background 0.3s var(--ease),
+    opacity 0.3s var(--ease), box-shadow 0.3s var(--ease);
+}
+
+.arrow svg {
+  width: 15px;
+  height: 15px;
+  fill: none;
+  stroke: var(--lilac-600);
+  stroke-width: 1.8;
+  stroke-linecap: round;
+  stroke-linejoin: round;
+}
+
+.arrow:hover:not(:disabled) {
+  background: var(--lilac-50);
+  transform: translateY(-2px);
+  box-shadow: var(--shadow-md);
+}
+
+.arrow:disabled { opacity: 0.34; cursor: default; }
+
+/* --- Le rail --------------------------------------------------------- */
+
+.rail-zone {
+  position: relative;
+  min-height: 0;
+  margin-inline: calc(var(--gutter) * -1);
+}
+
+/* Les projets continuent au-delà du bord : un dégradé le dit. */
+.rail-zone::before,
+.rail-zone::after {
+  content: "";
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  width: clamp(28px, var(--gutter), 90px);
+  z-index: 2;
+  pointer-events: none;
+  transition: opacity 0.4s var(--ease);
+}
+
+.rail-zone::before {
+  left: 0;
+  background: linear-gradient(90deg, var(--bg), transparent);
+}
+
+.rail-zone::after {
+  right: 0;
+  background: linear-gradient(270deg, var(--bg), transparent);
+}
+
+.rail-zone.at-start::before { opacity: 0; }
+.rail-zone.at-end::after { opacity: 0; }
+
+.rail {
+  display: flex;
+  gap: 22px;
+  list-style: none;
+  margin: 0;
+  padding: 10px var(--gutter) 22px;
+  overflow-x: auto;
+  overflow-y: hidden;
+  scroll-snap-type: x mandatory;
+  /* Sans ça, l'accrochage colle la première carte au bord de l'écran et
+     mange la gouttière : le snapport doit démarrer après le padding. */
+  scroll-padding-inline: var(--gutter);
+  scrollbar-width: thin;
+  scrollbar-color: var(--line-strong) transparent;
+  overscroll-behavior-x: contain;
+}
+
+.rail:focus-visible {
+  outline: none;
+  box-shadow: none;
+}
+
+.rail:focus-visible .p-card { border-color: var(--lilac-300); }
+
+.rail::-webkit-scrollbar { height: 7px; }
+.rail::-webkit-scrollbar-track { background: transparent; }
+.rail::-webkit-scrollbar-thumb {
+  background: var(--line-strong);
+  border-radius: var(--r-pill);
+}
+
+.p-card-wrap {
+  flex: none;
+  width: clamp(248px, 22vw, 300px);
+  scroll-snap-align: start;
+}
+
+.p-card-wrap.is-featured { width: clamp(280px, 26vw, 356px); }
+
+/* --- La carte -------------------------------------------------------- */
+
+.p-card {
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+  height: 100%;
+  padding: 0;
+  overflow: hidden;
+  text-align: left;
+  border-radius: var(--r-lg);
+}
+
+.p-card:hover {
+  transform: translateY(-7px);
+  border-color: var(--line-strong);
+  box-shadow: var(--shadow-lg);
+}
+
+.is-featured .p-card {
+  border-color: var(--lilac-200);
+  background: linear-gradient(170deg, var(--surface), var(--lilac-50));
+}
+
+.p-media {
+  display: block;
+  position: relative;
+  aspect-ratio: 16 / 10;
+  overflow: hidden;
+  background: var(--lilac-50);
+  flex: none;
+}
+
+.p-media img,
+.p-media .cover {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  transition: transform 0.7s var(--ease);
+}
+
+.p-card:hover .p-media img,
+.p-card:hover .p-media .cover { transform: scale(1.05); }
+
+.p-badge {
+  position: absolute;
+  top: 11px;
+  left: 11px;
+  padding: 4px 11px;
+  border-radius: var(--r-pill);
+  background: rgba(255, 255, 255, 0.92);
+  backdrop-filter: blur(6px);
+  font-family: var(--font-mono);
+  font-size: 10px;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  color: var(--lilac-600);
+}
+
+.p-star {
+  position: absolute;
+  top: 10px;
+  right: 12px;
+  font-size: 15px;
+  color: var(--pink-400);
+  animation: star-spin 5s ease-in-out infinite;
+}
+
+@keyframes star-spin {
+  0%, 100% { transform: rotate(0deg) scale(1); opacity: 0.8; }
+  50% { transform: rotate(180deg) scale(1.22); opacity: 1; }
+}
+
+.p-body {
+  display: flex;
+  flex-direction: column;
+  gap: 7px;
+  padding: 16px 18px 18px;
+  flex: 1;
+}
+
+.p-head {
+  display: flex;
+  align-items: baseline;
+  justify-content: space-between;
+  gap: 10px;
+}
+
+.p-title {
+  font-size: 17.5px;
+  font-weight: 600;
+  letter-spacing: -0.015em;
+  line-height: 1.2;
+}
+
+.p-year {
+  font-family: var(--font-mono);
+  font-size: 11.5px;
+  color: var(--ink-faint);
+  flex: none;
+}
+
+.p-tagline {
+  font-size: 14px;
+  color: var(--ink-soft);
+  line-height: 1.45;
+}
+
+.p-stack {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 6px;
+  margin-top: auto;
+  padding-top: 12px;
+}
+
+.p-tag {
+  padding: 3px 9px;
+  border-radius: var(--r-pill);
+  background: var(--lilac-50);
+  border: 1px solid var(--line);
+  font-size: 11.5px;
+  color: var(--lilac-600);
+}
+
+.p-more {
+  display: inline-flex;
+  align-items: center;
+  gap: 7px;
+  margin-top: 12px;
+  font-size: 13.5px;
+  font-weight: 500;
+  color: var(--lilac-600);
+}
+
+.p-more svg {
+  width: 14px;
+  height: 14px;
+  fill: none;
+  stroke: currentColor;
+  stroke-width: 1.7;
+  stroke-linecap: round;
+  stroke-linejoin: round;
+  transition: transform 0.35s var(--ease);
+}
+
+.p-card:hover .p-more svg { transform: translateX(4px); }
+
+/* --- Pied du rail ---------------------------------------------------- */
+
+.rail-hint {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  font-family: var(--font-mono);
+  font-size: 11px;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: var(--ink-faint);
+}
+
+.rail-hint-sep {
+  width: 22px;
+  height: 1.5px;
+  border-radius: 2px;
+  background: var(--line-strong);
+}
+
+@media (max-width: 900px) {
+  .projects-head { align-items: flex-start; }
+  .rail-arrows { display: none; }
+  .rail-hint { display: none; }
+}

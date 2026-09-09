@@ -21,20 +21,21 @@ npm run deploy   # build + publication sur la branche gh-pages
 
 ```
 src/
-├── data/content.js      # TOUT le contenu éditorial (FR + EN), un seul fichier
-├── theme.css            # design system : couleurs, type, ombres, animations
-├── hooks/useReveal.js   # apparition au scroll (IntersectionObserver)
+├── data/content.js       # TOUT le contenu éditorial (FR + EN), un seul fichier
+├── theme.css             # design system + système d'écrans (.frame)
+├── hooks/useInView.js    # détection d'entrée / sortie d'écran
 ├── components/
-│   ├── Nav.js           # navigation fixe + bascule FR/EN
-│   ├── Hero.js          # titre, constellation animée, étoiles
-│   ├── Work.js          # projets data en avant + grille web filtrable
-│   ├── ProjectModal.js  # fiche projet détaillée
-│   ├── MiniChart.js     # barres horizontales animées
-│   ├── Counter.js       # chiffre qui s'incrémente à l'apparition
-│   ├── About.js         # parcours, compétences, hors écran
-│   ├── Contact.js       # formulaire Formspree
-│   └── Footer.js
-└── App.js               # assemblage + gestion de la langue
+│   ├── Nav.js            # navigation fixe + bascule FR/EN
+│   ├── FrameNav.js       # pastilles latérales, un point par écran
+│   ├── Hero.js           # formes organiques, bulles, mot tournant
+│   ├── About.js          # parcours, formation, compétences — un écran
+│   ├── Projects.js       # filtres + rail horizontal de tous les projets
+│   ├── ProjectCover.js   # motif généré pour les projets sans capture
+│   ├── ProjectModal.js   # fiche projet détaillée
+│   ├── MiniChart.js      # barres horizontales animées
+│   ├── Counter.js        # chiffre qui s'incrémente à l'apparition
+│   └── Contact.js        # formulaire Formspree — un écran
+└── App.js                # assemblage + gestion de la langue
 ```
 
 ## Ajouter ou modifier un projet
@@ -67,6 +68,27 @@ Tout se passe dans `src/data/content.js`. Aucun composant à toucher.
 Les autres blocs de la page (`education`, `experience`, `skillGroups`,
 `personal`, et les libellés d'interface `ui`) vivent dans le même fichier.
 
+## Le système d'écrans
+
+La page est découpée en quatre écrans — accueil, parcours, projets, contact —
+et chacun occupe exactement la hauteur du viewport :
+
+```css
+html   { scroll-snap-type: y mandatory; }
+.frame { min-height: 100svh; scroll-snap-align: start; }
+```
+
+En dessous de 900 px de large **ou** 660 px de haut, l'accrochage est
+désactivé : mieux vaut un défilement normal qu'un contenu coupé.
+
+Quand un écran entre dans le viewport, `useInView` lui pose la classe
+`is-live` et ses blocs montent l'un après l'autre (`App.css`). L'état retombe
+à la sortie, donc l'animation rejoue si l'on revient en arrière.
+
+Les onze projets tiennent dans un seul écran grâce à un rail horizontal
+accrocheur (`scroll-snap-type: x`), piloté à la souris, au doigt, aux flèches
+du clavier ou aux boutons. Les filtres de catégorie sont dans le même écran.
+
 ## Choix de conception
 
 - **Contenu séparé du rendu.** Les composants ne contiennent aucun texte ;
@@ -76,14 +98,17 @@ Les autres blocs de la page (`education`, `experience`, `skillGroups`,
 - **Animations désactivables.** Tout est derrière
   `prefers-reduced-motion: reduce`.
 - **Pas de capture d'écran pour les projets data.** Un projet d'analyse se
-  montre par ses chiffres et son résultat, pas par une image de notebook.
+  montre par ses chiffres et son résultat, pas par une image de notebook :
+  `ProjectCover.js` dessine un motif à la place.
+- **Tout est sélectionnable.** Aucun `user-select: none`, chaque carte est un
+  bouton, chaque ligne de parcours un lien, chaque écran atteignable par les
+  pastilles latérales.
 
 ## À faire
 
-- [ ] Brancher le projet **Alice in Borderland** (dépôt non disponible en local
-      lors de la refonte — la fiche est en place, il manque le contenu).
-- [ ] Vérifier l'adresse e-mail publique affichée dans `Hero.js` et
-      `Contact.js` (actuellement `contact@majoli.io`).
+- [ ] Remplacer la capture de **CogSpace** : le visuel actuel est une photo
+      d'un document texte, illisible en vignette.
+- [ ] Mettre à jour `public/CVCyrine.pdf`, qui date d'avant le virage data.
 
 ## Auteur
 

@@ -1,58 +1,55 @@
 import React from "react";
 import { education, experience, skillGroups, personal } from "../data/content";
-import Reveal from "./Reveal";
+import useInView from "../hooks/useInView";
 import "./About.css";
 
-/* Une entrée de parcours : logo, titre, période, détail. */
-function TimelineItem({ logo, href, title, period, detail, sub, delay }) {
-  const Inner = (
-    <>
-      <span className="tl-logo">
-        <img src={logo} alt="" loading="lazy" />
-      </span>
-      <span className="tl-text">
-        <span className="tl-head">
-          <strong>{title}</strong>
-          <em>{period}</em>
-        </span>
-        {sub && <span className="tl-sub">{sub}</span>}
-        <span className="tl-detail">{detail}</span>
-      </span>
-    </>
-  );
-
+/* Une entrée de parcours. Toujours un lien : rien n'est mort sur la page. */
+function Entry({ logo, href, title, period, detail, sub }) {
   return (
-    <Reveal as="li" className="tl-item" delay={delay}>
-      {href ? (
-        <a href={href} target="_blank" rel="noopener noreferrer">{Inner}</a>
-      ) : (
-        <div>{Inner}</div>
-      )}
-    </Reveal>
+    <li className="entry">
+      <a href={href} target="_blank" rel="noopener noreferrer">
+        <span className="entry-logo">
+          <img src={logo} alt="" loading="lazy" />
+        </span>
+        <span className="entry-text">
+          <span className="entry-head">
+            <strong>{title}</strong>
+            <em>{period}</em>
+          </span>
+          {sub && <span className="entry-sub">{sub}</span>}
+          <span className="entry-detail">{detail}</span>
+        </span>
+      </a>
+    </li>
   );
 }
 
 export default function About({ t, language }) {
+  const [ref, inView] = useInView(0.3);
+
   return (
-    <section className="section about" id="about">
-      <div className="shell">
-        <Reveal>
-          <p className="eyebrow">{t.aboutTitle}</p>
-          <h2 className="section-title">
-            {language === "fr" ? (
-              <>Du web vers la <span className="magic">donnée</span></>
-            ) : (
-              <>From the web towards <span className="magic">data</span></>
-            )}
-          </h2>
-        </Reveal>
+    <section className={`frame about ${inView ? "is-live" : ""}`} id="about" ref={ref}>
+      <div className="frame-inner about-inner">
+        <header className="about-head">
+          <div>
+            <p className="eyebrow">{t.aboutTitle}</p>
+            <h2 className="section-title">
+              {language === "fr" ? (
+                <>Du web vers la <span className="magic">donnée</span></>
+              ) : (
+                <>From the web towards <span className="magic">data</span></>
+              )}
+            </h2>
+          </div>
+          <p className="section-lead about-lead">{t.aboutLead}</p>
+        </header>
 
         <div className="about-grid">
           <div className="about-col">
-            <Reveal as="h3" className="block-title">{t.experienceTitle}</Reveal>
-            <ul className="timeline">
-              {experience.map((e, i) => (
-                <TimelineItem
+            <h3 className="block-title">{t.experienceTitle}</h3>
+            <ul className="entries">
+              {experience.map((e) => (
+                <Entry
                   key={e.id}
                   logo={e.logo}
                   href={e.href}
@@ -60,32 +57,32 @@ export default function About({ t, language }) {
                   sub={e[language].role}
                   period={e[language].period}
                   detail={e[language].detail}
-                  delay={i * 80}
-                />
-              ))}
-            </ul>
-
-            <Reveal as="h3" className="block-title spaced">{t.educationTitle}</Reveal>
-            <ul className="timeline">
-              {education.map((e, i) => (
-                <TimelineItem
-                  key={e.id}
-                  logo={e.logo}
-                  href={e.href}
-                  title={e.name}
-                  period={e[language].period}
-                  detail={e[language].detail}
-                  delay={i * 80}
                 />
               ))}
             </ul>
           </div>
 
           <div className="about-col">
-            <Reveal as="h3" className="block-title">{t.skillsTitle}</Reveal>
+            <h3 className="block-title">{t.educationTitle}</h3>
+            <ul className="entries">
+              {education.map((e) => (
+                <Entry
+                  key={e.id}
+                  logo={e.logo}
+                  href={e.href}
+                  title={e.name}
+                  period={e[language].period}
+                  detail={e[language].detail}
+                />
+              ))}
+            </ul>
+          </div>
+
+          <div className="about-col about-col-wide">
+            <h3 className="block-title">{t.skillsTitle}</h3>
             <div className="skills">
-              {skillGroups.map((group, gi) => (
-                <Reveal key={group.id} className="skill-group" delay={gi * 90}>
+              {skillGroups.map((group) => (
+                <div key={group.id} className="skill-group">
                   <h4>{group[language].title}</h4>
                   <ul>
                     {group.items.map((item) => (
@@ -95,21 +92,20 @@ export default function About({ t, language }) {
                       </li>
                     ))}
                   </ul>
-                </Reveal>
+                </div>
               ))}
             </div>
-
-            <Reveal as="h3" className="block-title spaced">{t.personalTitle}</Reveal>
-            <ul className="personal">
-              {personal.map((p, i) => (
-                <Reveal as="li" key={p.id} delay={i * 70}>
-                  <img src={p.img} alt="" loading="lazy" />
-                  <p>{p[language]}</p>
-                </Reveal>
-              ))}
-            </ul>
           </div>
         </div>
+
+        <ul className="personal">
+          {personal.map((p) => (
+            <li key={p.id}>
+              <img src={p.img} alt="" loading="lazy" />
+              <p>{p[language]}</p>
+            </li>
+          ))}
+        </ul>
       </div>
     </section>
   );

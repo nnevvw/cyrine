@@ -1,5 +1,7 @@
 import React, { useEffect, useRef } from "react";
 import MiniChart from "./MiniChart";
+import Counter from "./Counter";
+import ProjectCover from "./ProjectCover";
 import "./ProjectModal.css";
 
 export default function ProjectModal({ project, t, language, onClose }) {
@@ -38,17 +40,37 @@ export default function ProjectModal({ project, t, language, onClose }) {
           </svg>
         </button>
 
-        {project.image && !project.featured && (
-          <div className="modal-media">
-            <img src={project.image} alt="" />
-          </div>
-        )}
+        <div className="modal-media">
+          <ProjectCover project={project} />
+        </div>
 
         <div className="modal-body">
           <p className="eyebrow">{copy.role}</p>
           <h3 className="modal-title">{copy.title}</h3>
           <p className="modal-tagline">{copy.tagline}</p>
           <p className="modal-summary">{copy.summary}</p>
+
+          {project.stats?.length > 0 && (
+            <ul className="modal-stats">
+              {project.stats.map((s) => (
+                <li key={s[language]}>
+                  <strong><Counter value={s.value} suffix={s.suffix} /></strong>
+                  <span>{s[language]}</span>
+                </li>
+              ))}
+            </ul>
+          )}
+
+          {copy.cardFields && (
+            <div className="book-card">
+              <span className="book-card-label">book card</span>
+              <ul>
+                {copy.cardFields.map((f, i) => (
+                  <li key={f} style={{ animationDelay: `${i * 90}ms` }}>{f}</li>
+                ))}
+              </ul>
+            </div>
+          )}
 
           {highlights.length > 0 && (
             <ul className="modal-highlights">

@@ -2,14 +2,14 @@ import React, { useEffect, useState } from "react";
 import "./Nav.css";
 
 const SECTIONS = [
-  { id: "work", key: "navWork" },
   { id: "about", key: "navAbout" },
+  { id: "projects", key: "navWork" },
   { id: "contact", key: "navContact" },
 ];
 
 export default function Nav({ t, language, onToggleLanguage }) {
   const [scrolled, setScrolled] = useState(false);
-  const [active, setActive] = useState("work");
+  const [active, setActive] = useState("about");
   const [open, setOpen] = useState(false);
 
   useEffect(() => {

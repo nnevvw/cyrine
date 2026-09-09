@@ -57,17 +57,21 @@
   --font-sans: "Outfit", system-ui, -apple-system, "Segoe UI", sans-serif;
   --font-mono: "Space Grotesk", ui-monospace, monospace;
 
-  /* Rythme */
-  --page: 1180px;
-  --gutter: clamp(20px, 5vw, 56px);
+  /* Rythme — pleine largeur : on borne très haut, presque jamais atteint */
+  --page: 1720px;
+  --gutter: clamp(20px, 4.5vw, 80px);
   --section-y: clamp(80px, 12vw, 150px);
+  --nav-h: 74px;
 
   --ease: cubic-bezier(0.22, 1, 0.36, 1);
 }
 
 * { box-sizing: border-box; }
 
-html { scroll-behavior: smooth; }
+html {
+  scroll-behavior: smooth;
+  scroll-snap-type: y mandatory;
+}
 
 body {
   margin: 0;
@@ -101,6 +105,15 @@ button {
   border: none;
   background: none;
   cursor: pointer;
+  /* Le texte d'un bouton reste copiable : rien n'est verrouillé sur ce site. */
+  -webkit-user-select: text;
+  user-select: text;
+}
+
+/* Aucun bloc décoratif ne doit avaler la sélection du texte qu'il contient. */
+h1, h2, h3, h4, p, li, span, strong, em, blockquote, figcaption, label, td, th {
+  -webkit-user-select: text;
+  user-select: text;
 }
 
 ::selection { background: var(--pink-200); color: var(--ink); }
@@ -118,6 +131,41 @@ button {
   max-width: var(--page);
   margin-inline: auto;
   padding-inline: var(--gutter);
+}
+
+/* --- Un écran = une partie ------------------------------------------ *
+   Chaque section occupe la hauteur du viewport et s'y accroche. En dessous
+   d'une certaine hauteur, ou sur mobile, on relâche : mieux vaut un
+   défilement normal qu'un contenu coupé.
+ * ------------------------------------------------------------------ */
+
+.frame {
+  position: relative;
+  min-height: 100svh;
+  scroll-snap-align: start;
+  scroll-snap-stop: always;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  padding-block: calc(var(--nav-h) + 26px) 74px;
+  overflow: hidden;
+}
+
+.frame-inner {
+  width: 100%;
+  max-width: var(--page);
+  margin-inline: auto;
+  padding-inline: var(--gutter);
+}
+
+@media (max-width: 900px), (max-height: 660px) {
+  html { scroll-snap-type: none; }
+  .frame {
+    min-height: 0;
+    scroll-snap-align: none;
+    padding-block: clamp(90px, 14vw, 140px);
+    overflow: visible;
+  }
 }
 
 .section {
@@ -158,8 +206,8 @@ button {
 }
 
 .section-title {
-  font-size: clamp(34px, 5.5vw, 58px);
-  margin-top: 18px;
+  font-size: clamp(30px, 4.4vw, 54px);
+  margin-top: 14px;
 }
 
 .section-lead {
@@ -193,6 +241,7 @@ button {
 }
 
 .btn {
+  position: relative;
   display: inline-flex;
   align-items: center;
   justify-content: center;
@@ -202,9 +251,32 @@ button {
   font-size: 15px;
   font-weight: 500;
   text-decoration: none;
+  overflow: hidden;
+  isolation: isolate;
   transition: transform 0.35s var(--ease), box-shadow 0.35s var(--ease),
-    background 0.35s var(--ease);
+    background 0.35s var(--ease), color 0.35s var(--ease);
 }
+
+/* Un reflet qui balaie le bouton de gauche à droite au survol. */
+.btn::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  z-index: -1;
+  background: linear-gradient(
+    100deg,
+    transparent 20%,
+    rgba(255, 255, 255, 0.55) 50%,
+    transparent 80%
+  );
+  translate: -130% 0;
+  transition: translate 0.7s var(--ease);
+}
+
+.btn:hover::after,
+.btn:focus-visible::after { translate: 130% 0; }
+
+.btn:active { transform: translateY(1px) scale(0.985); }
 
 .btn-primary {
   background: linear-gradient(120deg, var(--lilac-400), var(--pink-300));

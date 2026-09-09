@@ -1,14 +1,18 @@
-import React, { useEffect, useState } from "react";
-import useReveal from "../hooks/useReveal";
+import React, { useEffect, useRef, useState } from "react";
+import useInView from "../hooks/useInView";
 
 /** Compte de 0 jusqu'à `value` quand le chiffre devient visible. */
 export default function Counter({ value, suffix = "", duration = 1400 }) {
-  const [ref, shown] = useReveal({ threshold: 0.5 });
+  const [ref, shown] = useInView(0.5);
   const [display, setDisplay] = useState(0);
+  // useInView retombe à false quand on quitte l'écran ; on retient le premier
+  // passage pour que le chiffre ne reparte pas de zéro à chaque aller-retour.
+  const played = useRef(false);
   const decimals = String(value).includes(".") ? 1 : 0;
 
   useEffect(() => {
-    if (!shown) return undefined;
+    if (!shown || played.current) return undefined;
+    played.current = true;
 
     const reduced = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
     if (reduced) {

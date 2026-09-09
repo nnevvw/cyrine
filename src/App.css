@@ -11,17 +11,46 @@
   font-weight: 500;
 }
 
-.skip-link:focus {
-  left: 0;
+.skip-link:focus { left: 0; }
+
+/* --- Arrivée d'un écran --------------------------------------------- *
+   Quand un écran entre dans le viewport, ses blocs montent l'un après
+   l'autre. Le hero garde ses propres animations d'ouverture.
+ * ------------------------------------------------------------------ */
+
+.frame:not(.hero) .frame-inner > * {
+  opacity: 0;
+  transform: translateY(30px);
+  transition: opacity 0.75s var(--ease), transform 0.75s var(--ease);
 }
 
-/* Les sections alternent avec un voile légèrement plus soutenu, pour
-   qu'on sente la respiration sans poser de vraies bordures. */
-.about::before {
+.frame.is-live .frame-inner > * {
+  opacity: 1;
+  transform: none;
+}
+
+.frame.is-live .frame-inner > *:nth-child(1) { transition-delay: 0.06s; }
+.frame.is-live .frame-inner > *:nth-child(2) { transition-delay: 0.16s; }
+.frame.is-live .frame-inner > *:nth-child(3) { transition-delay: 0.26s; }
+.frame.is-live .frame-inner > *:nth-child(4) { transition-delay: 0.36s; }
+
+/* Chaque écran se distingue du suivant par un voile, sans trait de séparation. */
+.about::before,
+.contact::before {
   content: "";
   position: absolute;
   inset: 0;
-  background: linear-gradient(180deg, transparent, rgba(244, 236, 255, 0.55) 18%, rgba(244, 236, 255, 0.55) 82%, transparent);
-  pointer-events: none;
   z-index: -1;
+  pointer-events: none;
+  background: linear-gradient(
+    180deg,
+    transparent,
+    rgba(244, 236, 255, 0.5) 16%,
+    rgba(244, 236, 255, 0.5) 84%,
+    transparent
+  );
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .frame:not(.hero) .frame-inner > * { opacity: 1; transform: none; }
 }

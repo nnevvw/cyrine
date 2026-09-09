@@ -152,3 +152,85 @@
   gap: 11px;
   margin-top: 26px;
 }
+
+/* --- Chiffres clés dans la fiche ------------------------------------- */
+
+.modal-stats {
+  list-style: none;
+  margin: 26px 0 0;
+  padding: 0;
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
+  gap: 18px;
+}
+
+.modal-stats li {
+  padding: 16px 18px;
+  border-radius: var(--r-md);
+  background: linear-gradient(150deg, var(--lilac-50), var(--surface-2));
+  border: 1px solid var(--line);
+}
+
+.modal-stats strong {
+  display: block;
+  font-family: var(--font-mono);
+  font-size: 30px;
+  font-weight: 700;
+  line-height: 1;
+  letter-spacing: -0.03em;
+  background: linear-gradient(120deg, var(--lilac-500), var(--pink-400));
+  -webkit-background-clip: text;
+  background-clip: text;
+  color: transparent;
+}
+
+.modal-stats span {
+  display: block;
+  margin-top: 8px;
+  font-size: 13.5px;
+  color: var(--ink-soft);
+  line-height: 1.35;
+}
+
+/* --- Aperçu de la fiche de lecture produite par Bookworm -------------- */
+
+.book-card {
+  margin-top: 26px;
+  padding: 20px 22px;
+  border-radius: var(--r-md);
+  border: 1px dashed var(--line-strong);
+  background: var(--surface-2);
+}
+
+.book-card-label {
+  font-family: var(--font-mono);
+  font-size: 10.5px;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  color: var(--ink-faint);
+}
+
+.book-card ul {
+  list-style: none;
+  margin: 14px 0 0;
+  padding: 0;
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+}
+
+.book-card li {
+  padding: 7px 14px;
+  border-radius: var(--r-pill);
+  background: linear-gradient(120deg, var(--lilac-100), var(--pink-100));
+  font-size: 13.5px;
+  color: var(--lilac-600);
+  animation: chip-in 0.5s var(--ease) backwards;
+}
+
+@keyframes chip-in {
+  from { opacity: 0; transform: translateY(8px) scale(0.94); }
+  to { opacity: 1; transform: none; }
+}
+
+.modal-media .cover { border-radius: var(--r-xl) var(--r-xl) 0 0; }

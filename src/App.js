@@ -1,10 +1,10 @@
 import React, { useEffect, useState } from "react";
 import Nav from "./components/Nav";
+import FrameNav from "./components/FrameNav";
 import Hero from "./components/Hero";
-import Work from "./components/Work";
 import About from "./components/About";
+import Projects from "./components/Projects";
 import Contact from "./components/Contact";
-import Footer from "./components/Footer";
 import { ui } from "./data/content";
 import "./App.css";
 
@@ -34,6 +34,14 @@ export default function App() {
 
   const toggleLanguage = () => setLanguage((l) => (l === "fr" ? "en" : "fr"));
 
+  // L'ordre des écrans : qui je suis, d'où je viens, ce que je fais, comment me joindre.
+  const frames = [
+    { id: "top", label: t.navHome },
+    { id: "about", label: t.navAbout },
+    { id: "projects", label: t.navWork },
+    { id: "contact", label: t.navContact },
+  ];
+
   return (
     <>
       <div className="aurora" aria-hidden="true">
@@ -43,20 +51,19 @@ export default function App() {
       </div>
       <div className="grain" aria-hidden="true" />
 
-      <a className="skip-link" href="#work">
+      <a className="skip-link" href="#about">
         {language === "fr" ? "Aller au contenu" : "Skip to content"}
       </a>
 
       <Nav t={t} language={language} onToggleLanguage={toggleLanguage} />
+      <FrameNav frames={frames} />
 
       <main>
         <Hero t={t} />
-        <Work t={t} language={language} />
         <About t={t} language={language} />
+        <Projects t={t} language={language} />
         <Contact t={t} language={language} />
       </main>
-
-      <Footer t={t} />
     </>
   );
 }

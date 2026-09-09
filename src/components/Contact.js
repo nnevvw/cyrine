@@ -1,10 +1,11 @@
 import React from "react";
 import { useForm, ValidationError } from "@formspree/react";
-import Reveal from "./Reveal";
+import useInView from "../hooks/useInView";
 import "./Contact.css";
 
 export default function Contact({ t, language }) {
   const [state, handleSubmit] = useForm("xeorobow");
+  const [ref, inView] = useInView(0.35);
 
   const labels = {
     fr: {
@@ -34,11 +35,10 @@ export default function Contact({ t, language }) {
   }[language];
 
   return (
-    <section className="section contact" id="contact">
-      <div className="shell">
+    <section className={`frame contact ${inView ? "is-live" : ""}`} id="contact" ref={ref}>
+      <div className="frame-inner">
         <div className="contact-card card">
           <div className="contact-intro">
-            <Reveal>
               <p className="eyebrow">{t.contactTitle}</p>
               <h2 className="section-title">
                 {language === "fr" ? (
@@ -51,7 +51,7 @@ export default function Contact({ t, language }) {
 
               <ul className="contact-links">
                 <li>
-                  <a href="mailto:contact@majoli.io">contact@majoli.io</a>
+                  <a href="mailto:cyrine.zarkouna@gmail.com">cyrine.zarkouna@gmail.com</a>
                 </li>
                 <li>
                   <a href="https://www.linkedin.com/in/cyrine-zarkouna-6022301b1" target="_blank" rel="noopener noreferrer">
@@ -72,10 +72,9 @@ export default function Contact({ t, language }) {
               >
                 {t.downloadCv}
               </a>
-            </Reveal>
           </div>
 
-          <Reveal className="contact-form-wrap" delay={120}>
+          <div className="contact-form-wrap">
             {state.succeeded ? (
               <div className="contact-success">
                 <span className="success-mark" aria-hidden="true">✦</span>
@@ -109,7 +108,7 @@ export default function Contact({ t, language }) {
                 </button>
               </form>
             )}
-          </Reveal>
+          </div>
         </div>
       </div>
     </section>

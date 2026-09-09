@@ -1,16 +1,8 @@
-.hero {
-  position: relative;
-  min-height: 100svh;
-  display: flex;
-  align-items: center;
-  padding-top: 74px;
-  overflow: hidden;
-}
+.hero { justify-content: center; }
 
 .hero-inner {
   position: relative;
-  z-index: 2;
-  padding-block: clamp(60px, 10vh, 110px);
+  z-index: 3;
 }
 
 .hero-eyebrow {
@@ -19,9 +11,9 @@
 }
 
 .hero-title {
-  margin-top: 22px;
-  font-size: clamp(56px, 13vw, 148px);
-  line-height: 0.92;
+  margin-top: 18px;
+  font-size: clamp(52px, 11.5vw, 168px);
+  line-height: 0.9;
   letter-spacing: -0.045em;
   font-weight: 500;
 }
@@ -51,22 +43,57 @@
   color: var(--pink-300);
 }
 
+/* --- Phrase à mot tournant ------------------------------------------ */
+
+.hero-phrase {
+  margin-top: 22px;
+  font-size: clamp(20px, 2.6vw, 32px);
+  font-weight: 300;
+  color: var(--ink);
+  opacity: 0;
+  animation: rise 1s var(--ease) 0.54s forwards;
+}
+
+.rotator {
+  position: relative;
+  display: inline-grid;
+  vertical-align: bottom;
+}
+
+/* Copie invisible du mot le plus long : elle réserve la place. */
+.rotator-ghost {
+  grid-area: 1 / 1;
+  visibility: hidden;
+  font-family: var(--font-display);
+  font-style: italic;
+}
+
+.rotator-word {
+  grid-area: 1 / 1;
+  animation: word-in 0.6s var(--ease) both;
+}
+
+@keyframes word-in {
+  from { opacity: 0; transform: translateY(0.45em) rotate(2deg); }
+  to { opacity: 1; transform: none; }
+}
+
 .hero-lead {
-  margin-top: 30px;
-  max-width: 46ch;
-  font-size: clamp(16.5px, 1.9vw, 20px);
+  margin-top: 22px;
+  max-width: 48ch;
+  font-size: clamp(16px, 1.5vw, 19px);
   color: var(--ink-soft);
   opacity: 0;
-  animation: rise 1s var(--ease) 0.58s forwards;
+  animation: rise 1s var(--ease) 0.66s forwards;
 }
 
 .hero-actions {
   display: flex;
   flex-wrap: wrap;
   gap: 13px;
-  margin-top: 38px;
+  margin-top: 34px;
   opacity: 0;
-  animation: rise 1s var(--ease) 0.72s forwards;
+  animation: rise 1s var(--ease) 0.78s forwards;
 }
 
 .hero-actions svg {
@@ -80,16 +107,16 @@
   transition: transform 0.35s var(--ease);
 }
 
-.hero-actions .btn-primary:hover svg { transform: translateX(3px); }
+.hero-actions .btn-primary:hover svg { transform: translateX(4px); }
 
 .hero-social {
   display: flex;
   gap: 12px;
   list-style: none;
   padding: 0;
-  margin: 44px 0 0;
+  margin: 38px 0 0;
   opacity: 0;
-  animation: rise 1s var(--ease) 0.86s forwards;
+  animation: rise 1s var(--ease) 0.9s forwards;
 }
 
 .hero-social a {
@@ -106,28 +133,105 @@
 }
 
 .hero-social a:hover {
-  transform: translateY(-4px) rotate(-4deg);
+  transform: translateY(-5px) rotate(-5deg);
   border-color: var(--lilac-300);
   box-shadow: var(--shadow-md);
 }
 
-.hero-social svg {
-  width: 18px;
-  height: 18px;
-  fill: var(--lilac-600);
-}
+.hero-social svg { width: 18px; height: 18px; fill: var(--lilac-600); }
 
 @keyframes rise {
   from { opacity: 0; transform: translateY(26px); }
   to { opacity: 1; transform: none; }
 }
 
-/* Étoiles ------------------------------------------------------------ */
+/* --- Formes organiques ---------------------------------------------- */
+
+.hero-decor {
+  position: absolute;
+  inset: 0;
+  z-index: 0;
+  pointer-events: none;
+}
+
+.blob {
+  position: absolute;
+  filter: blur(26px);
+  will-change: transform;
+}
+
+.blob.b1 {
+  --blob-from: #e3d0ff;
+  --blob-to: #ffd7ef;
+  width: min(58vw, 780px);
+  height: min(58vw, 780px);
+  top: -8%;
+  right: -6%;
+  opacity: 0.75;
+  animation: sway 22s ease-in-out infinite;
+}
+
+.blob.b2 {
+  --blob-from: #ffe0f0;
+  --blob-to: #d8f5ea;
+  width: min(38vw, 520px);
+  height: min(38vw, 520px);
+  bottom: -14%;
+  right: 18%;
+  opacity: 0.6;
+  animation: sway 28s ease-in-out infinite reverse;
+}
+
+.blob.b3 {
+  --blob-from: #efe4ff;
+  --blob-to: #ffeccb;
+  width: min(30vw, 400px);
+  height: min(30vw, 400px);
+  top: 46%;
+  right: 52%;
+  opacity: 0.42;
+  animation: sway 34s ease-in-out infinite;
+}
+
+@keyframes sway {
+  0%, 100% { translate: 0 0; rotate: 0deg; }
+  50% { translate: -3% 4%; rotate: 8deg; }
+}
+
+/* --- Bulles ---------------------------------------------------------- */
+
+.orbs {
+  position: absolute;
+  inset: 0;
+  z-index: 1;
+  pointer-events: none;
+  overflow: hidden;
+}
+
+.orbs span {
+  position: absolute;
+  bottom: -80px;
+  border-radius: 50%;
+  background: radial-gradient(circle at 32% 30%, rgba(255, 255, 255, 0.9), rgba(214, 186, 255, 0.42) 46%, rgba(255, 190, 226, 0.24));
+  box-shadow: inset 0 0 12px rgba(255, 255, 255, 0.6);
+  animation-name: float-up;
+  animation-timing-function: linear;
+  animation-iteration-count: infinite;
+}
+
+@keyframes float-up {
+  0% { transform: translate(0, 0) scale(0.7); opacity: 0; }
+  12% { opacity: 0.7; }
+  85% { opacity: 0.5; }
+  100% { transform: translate(var(--drift), -108svh) scale(1.1); opacity: 0; }
+}
+
+/* --- Étoiles --------------------------------------------------------- */
 
 .sparkles {
   position: absolute;
   inset: 0;
-  z-index: 1;
+  z-index: 2;
   pointer-events: none;
 }
 
@@ -143,68 +247,34 @@
   50% { opacity: 0.75; transform: scale(1) rotate(45deg); }
 }
 
-/* Constellation ------------------------------------------------------ */
-
-.constellation {
-  position: absolute;
-  top: 12%;
-  right: -4%;
-  width: min(56vw, 720px);
-  height: min(56vh, 620px);
-  z-index: 0;
-  opacity: 0.85;
-  pointer-events: none;
-}
-
-.c-link {
-  stroke-dasharray: 100;
-  stroke-dashoffset: 100;
-  animation: draw 1.6s var(--ease) forwards;
-  opacity: 0.55;
-}
-
-@keyframes draw {
-  to { stroke-dashoffset: 0; }
-}
-
-.c-dot {
-  fill: var(--lilac-400);
-  opacity: 0;
-  animation: pop 0.7s var(--ease) forwards, float-dot 7s ease-in-out infinite;
-}
-
-@keyframes pop {
-  from { opacity: 0; transform: scale(0); }
-  to { opacity: 0.9; transform: scale(1); }
-}
-
-@keyframes float-dot {
-  0%, 100% { translate: 0 0; }
-  50% { translate: 0 -2px; }
-}
-
-/* Indicateur de scroll ----------------------------------------------- */
+/* --- Invitation à descendre ------------------------------------------ */
 
 .hero-scroll {
   position: absolute;
-  bottom: 26px;
+  bottom: 24px;
   left: 50%;
   translate: -50% 0;
+  z-index: 3;
   display: flex;
   flex-direction: column;
   align-items: center;
   gap: 10px;
+  padding: 8px 14px;
+  border-radius: var(--r-pill);
+  text-decoration: none;
   font-family: var(--font-mono);
   font-size: 10.5px;
   letter-spacing: 0.2em;
   text-transform: uppercase;
   color: var(--ink-faint);
-  z-index: 2;
+  transition: color 0.3s var(--ease);
 }
+
+.hero-scroll:hover { color: var(--lilac-600); }
 
 .hero-scroll-line {
   width: 1.5px;
-  height: 46px;
+  height: 42px;
   border-radius: 2px;
   background: linear-gradient(var(--lilac-300), transparent);
   overflow: hidden;
@@ -222,10 +292,10 @@
 
 @keyframes scroll-run {
   0% { transform: translateY(-14px); }
-  100% { transform: translateY(46px); }
+  100% { transform: translateY(42px); }
 }
 
-@media (max-width: 860px) {
-  .constellation { opacity: 0.4; width: 100%; right: 0; top: auto; bottom: 8%; }
+@media (max-width: 900px) {
   .hero-scroll { display: none; }
+  .blob.b3 { display: none; }
 }

@@ -1,5 +1,5 @@
 import React from "react";
-import useReveal from "../hooks/useReveal";
+import useInView from "../hooks/useInView";
 import "./MiniChart.css";
 
 /**
@@ -7,7 +7,7 @@ import "./MiniChart.css";
  * accessible, et ça s'anime tout seul quand le bloc entre à l'écran.
  */
 export default function MiniChart({ chart, language }) {
-  const [ref, shown] = useReveal({ threshold: 0.3 });
+  const [ref, shown] = useInView(0.3);
   if (!chart) return null;
 
   const max = Math.max(...chart.series.map((s) => s.value));

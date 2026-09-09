@@ -1,17 +1,17 @@
-import React, { useMemo } from "react";
+import React, { useEffect, useMemo, useState } from "react";
 import "./Hero.css";
 
-/* Petites étoiles disséminées derrière le titre. */
-function Sparkles({ count = 14 }) {
+/* Poussière lumineuse : de petites étoiles qui s'allument et s'éteignent. */
+function Sparkles({ count = 18 }) {
   const stars = useMemo(
     () =>
       Array.from({ length: count }, (_, i) => ({
         id: i,
         top: `${Math.round(Math.random() * 100)}%`,
         left: `${Math.round(Math.random() * 100)}%`,
-        size: 4 + Math.random() * 9,
+        size: 4 + Math.random() * 10,
         delay: Math.random() * 6,
-        duration: 3.5 + Math.random() * 3.5,
+        duration: 3.5 + Math.random() * 4,
       })),
     [count]
   );
@@ -38,66 +38,122 @@ function Sparkles({ count = 14 }) {
   );
 }
 
-/**
- * Nuage de points relié — un scatter plot qui a l'air d'une constellation.
- * Les positions sont fixes (pas de hasard au rendu) pour rester lisible.
+/*
+ * Une forme organique qui se déforme lentement. Rien de géométrique : les
+ * trois tracés ne sont que le même contour respiré différemment, et SMIL
+ * interpole de l'un à l'autre en boucle.
  */
-function Constellation() {
-  const points = [
-    [18, 72], [30, 58], [42, 63], [50, 40], [62, 47],
-    [70, 28], [82, 34], [26, 34], [38, 22], [56, 74], [74, 64], [88, 54],
-  ];
-  const links = [[0, 1], [1, 2], [2, 3], [3, 4], [4, 5], [5, 6], [1, 7], [7, 8], [2, 9], [4, 10], [10, 11], [6, 11]];
+const BLOB_A =
+  "M436 92c58 40 78 128 62 200-16 72-68 128-134 158-66 30-146 34-202-2C106 412 72 336 68 262 64 188 90 116 142 74c52-42 130-38 190-24 36 9 68 22 104 42Z";
+const BLOB_B =
+  "M448 128c40 58 30 142-6 208-36 66-98 114-168 128-70 14-148-6-192-56-44-50-54-130-32-198 22-68 76-124 144-146 68-22 150-10 200 30 22 18 38 20 54 34Z";
+const BLOB_C =
+  "M420 76c66 48 92 140 74 216-18 76-80 136-152 160-72 24-154 12-204-38C88 364 70 282 82 210c12-72 54-138 116-166C260 16 344 28 420 76Z";
 
+function Blob({ className, dur, delay = "0s" }) {
   return (
-    <svg className="constellation" viewBox="0 0 100 100" preserveAspectRatio="none" aria-hidden="true">
+    <svg className={`blob ${className}`} viewBox="0 0 520 520" aria-hidden="true">
       <defs>
-        <linearGradient id="cline" x1="0" y1="0" x2="1" y2="1">
-          <stop offset="0%" stopColor="#c6aaff" />
-          <stop offset="100%" stopColor="#ffa4d6" />
+        <linearGradient id={`bg-${className}`} x1="0" y1="0" x2="1" y2="1">
+          <stop offset="0%" stopColor="var(--blob-from)" />
+          <stop offset="100%" stopColor="var(--blob-to)" />
         </linearGradient>
       </defs>
-      {links.map(([a, b], i) => (
-        <line
-          key={i}
-          x1={points[a][0]} y1={points[a][1]}
-          x2={points[b][0]} y2={points[b][1]}
-          stroke="url(#cline)"
-          strokeWidth="0.35"
-          className="c-link"
-          style={{ animationDelay: `${i * 0.11}s` }}
+      <path fill={`url(#bg-${className})`} d={BLOB_A}>
+        <animate
+          attributeName="d"
+          dur={dur}
+          begin={delay}
+          repeatCount="indefinite"
+          calcMode="spline"
+          keyTimes="0;0.33;0.66;1"
+          keySplines="0.4 0 0.2 1;0.4 0 0.2 1;0.4 0 0.2 1"
+          values={`${BLOB_A};${BLOB_B};${BLOB_C};${BLOB_A}`}
         />
-      ))}
-      {points.map(([x, y], i) => (
-        <circle
-          key={i}
-          cx={x} cy={y}
-          r={i % 4 === 0 ? 1.5 : 1}
-          className="c-dot"
-          style={{ animationDelay: `${0.5 + i * 0.09}s` }}
-        />
-      ))}
+      </path>
     </svg>
   );
 }
 
-export default function Hero({ t }) {
-  const scrollToWork = (event) => {
-    event.preventDefault();
-    document.getElementById("work")?.scrollIntoView({ behavior: "smooth" });
-  };
+/* Bulles pastel qui montent doucement derrière le titre. */
+function Orbs({ count = 9 }) {
+  const orbs = useMemo(
+    () =>
+      Array.from({ length: count }, (_, i) => ({
+        id: i,
+        left: `${5 + Math.random() * 90}%`,
+        size: 12 + Math.random() * 46,
+        delay: Math.random() * 14,
+        duration: 16 + Math.random() * 14,
+        drift: `${(Math.random() - 0.5) * 90}px`,
+      })),
+    [count]
+  );
 
-  const scrollToContact = (event) => {
+  return (
+    <div className="orbs" aria-hidden="true">
+      {orbs.map((o) => (
+        <span
+          key={o.id}
+          style={{
+            left: o.left,
+            width: o.size,
+            height: o.size,
+            animationDelay: `${o.delay}s`,
+            animationDuration: `${o.duration}s`,
+            "--drift": o.drift,
+          }}
+        />
+      ))}
+    </div>
+  );
+}
+
+/* Le mot de fin de phrase change tout seul, avec un fondu vertical. */
+function RotatingWord({ words }) {
+  const [index, setIndex] = useState(0);
+
+  useEffect(() => {
+    const reduced = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+    if (reduced || words.length < 2) return undefined;
+
+    const timer = setInterval(() => {
+      setIndex((i) => (i + 1) % words.length);
+    }, 2600);
+
+    return () => clearInterval(timer);
+  }, [words]);
+
+  return (
+    <span className="rotator">
+      {/* Le mot le plus long fixe la largeur : la phrase ne saute jamais. */}
+      <span className="rotator-ghost" aria-hidden="true">
+        {words.reduce((a, b) => (b.length > a.length ? b : a), "")}
+      </span>
+      <span key={index} className="rotator-word magic">
+        {words[index]}
+      </span>
+    </span>
+  );
+}
+
+export default function Hero({ t }) {
+  const goTo = (id) => (event) => {
     event.preventDefault();
-    document.getElementById("contact")?.scrollIntoView({ behavior: "smooth" });
+    document.getElementById(id)?.scrollIntoView({ behavior: "smooth", block: "start" });
   };
 
   return (
-    <section className="hero" id="top">
+    <section className="frame hero" id="top">
+      <div className="hero-decor" aria-hidden="true">
+        <Blob className="b1" dur="19s" />
+        <Blob className="b2" dur="24s" delay="-6s" />
+        <Blob className="b3" dur="30s" delay="-12s" />
+      </div>
+      <Orbs />
       <Sparkles />
-      <Constellation />
 
-      <div className="shell hero-inner">
+      <div className="frame-inner hero-inner">
         <p className="eyebrow hero-eyebrow">{t.role}</p>
 
         <h1 className="hero-title">
@@ -107,16 +163,20 @@ export default function Hero({ t }) {
           </span>
         </h1>
 
+        <p className="hero-phrase">
+          {t.heroBefore} <RotatingWord words={t.heroRotating} />
+        </p>
+
         <p className="hero-lead">{t.heroLead}</p>
 
         <div className="hero-actions">
-          <a href="#work" className="btn btn-primary" onClick={scrollToWork}>
+          <a href="#projects" className="btn btn-primary" onClick={goTo("projects")}>
             {t.heroCtaWork}
             <svg viewBox="0 0 16 16" aria-hidden="true">
               <path d="M3 8h10m0 0-4-4m4 4-4 4" />
             </svg>
           </a>
-          <a href="#contact" className="btn btn-ghost" onClick={scrollToContact}>
+          <a href="#contact" className="btn btn-ghost" onClick={goTo("contact")}>
             {t.heroCtaContact}
           </a>
         </div>
@@ -144,7 +204,7 @@ export default function Hero({ t }) {
             </a>
           </li>
           <li>
-            <a href="mailto:contact@majoli.io" aria-label="Email">
+            <a href="mailto:cyrine.zarkouna@gmail.com" aria-label="Email">
               <svg viewBox="0 0 24 24" aria-hidden="true">
                 <path d="M3 5h18a1 1 0 0 1 1 1v12a1 1 0 0 1-1 1H3a1 1 0 0 1-1-1V6a1 1 0 0 1 1-1Zm.9 2 8.1 5.6L20.1 7H3.9Z" />
               </svg>
@@ -153,10 +213,10 @@ export default function Hero({ t }) {
         </ul>
       </div>
 
-      <div className="hero-scroll" aria-hidden="true">
+      <a className="hero-scroll" href="#about" onClick={goTo("about")}>
         <span>{t.scroll}</span>
-        <span className="hero-scroll-line" />
-      </div>
+        <span className="hero-scroll-line" aria-hidden="true" />
+      </a>
     </section>
   );
 }
