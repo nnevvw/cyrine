@@ -121,7 +121,9 @@ s'aligne en haut au lieu d'être rogné sous la barre de navigation.
       `repo` : ChatGPT × Majoli, Circle, Locatio, CogSpace, EcoSphere. Leur
       contenu est intact dans `data/content.js`, seule l'adresse manque.
 - [ ] Ajouter les visuels manquants des projets web dans `public/`, puis
-      renseigner leur champ `image` dans `data/content.js`.
+      renseigner leur champ `image` dans `data/content.js`. Ajouter
+      `fit: "contain"` pour un graphique ou une illustration, qu'il ne faut pas
+      rogner ; sans ce champ, l'image est recadrée comme une capture de site.
 - [ ] Remplacer la capture de **CogSpace** : le visuel actuel est une photo
       d'un document texte, illisible en vignette.
 - [ ] Mettre à jour `public/CVCyrine.pdf`, qui date d'avant le virage data.

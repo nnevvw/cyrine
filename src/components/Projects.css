@@ -178,6 +178,29 @@
   object-fit: cover;
 }
 
+/* Un graphique ou une gravure se montrent entiers, présentés comme une
+   planche posée sur le fond pastel. Les rogner les rendrait illisibles. */
+.p-sheet-visual img.is-contain {
+  object-fit: contain;
+  padding: clamp(14px, 1.6vw, 22px);
+  background: #fff;
+  border-radius: var(--r-md);
+  box-shadow: var(--shadow-md);
+  width: calc(100% - clamp(24px, 3vw, 44px));
+  height: auto;
+  max-height: calc(100% - clamp(24px, 3vw, 44px));
+  margin: auto;
+}
+
+.p-sheet-visual:has(img.is-contain) {
+  display: grid;
+  place-items: center;
+  background: linear-gradient(150deg, var(--lilac-100), var(--pink-100) 60%, var(--butter));
+}
+
+/* Une planche large a besoin de place : on lui donne un peu de la colonne. */
+.p-sheet.has-figure { grid-template-columns: minmax(0, 1fr) minmax(0, 1.1fr); }
+
 .p-sheet-body {
   padding: clamp(20px, 2.4vw, 32px);
   padding-right: clamp(20px, 2.4vw, 32px);

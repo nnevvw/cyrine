@@ -1,7 +1,7 @@
 .frame-nav {
   position: fixed;
   top: 50%;
-  left: clamp(12px, 1.6vw, 24px);
+  right: clamp(12px, 1.6vw, 24px);
   translate: 0 -50%;
   z-index: 55;
 }
@@ -16,10 +16,14 @@
 
 /* L'étoile est le premier élément et ne bouge jamais : le libellé, lui, est
    sorti du flux. Sans ça, un libellé plus long décalait son étoile. */
+/* L'étoile occupe seule la largeur du lien, le libellé est hors du flux :
+   c'est ce qui garde les quatre étoiles sur le même axe, quelle que soit la
+   longueur du mot qui les accompagne. */
 .frame-nav a {
   position: relative;
   display: flex;
   align-items: center;
+  justify-content: center;
   text-decoration: none;
   padding: 3px;
   width: 24px;
@@ -57,7 +61,7 @@
 
 .fn-label {
   position: absolute;
-  left: 28px;
+  right: 28px;
   top: 50%;
   translate: -6px -50%;
   font-family: var(--font-mono);

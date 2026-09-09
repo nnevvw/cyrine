@@ -37,7 +37,16 @@ function Book() {
 
 export default function ProjectCover({ project, alt = "" }) {
   if (project.image) {
-    return <img src={project.image} alt={alt} loading="lazy" />;
+    // Un graphique ou une gravure se montrent entiers : les rogner les rendrait
+    // illisibles. Les captures de sites, elles, supportent le recadrage.
+    return (
+      <img
+        src={project.image}
+        alt={alt}
+        loading="lazy"
+        className={project.fit === "contain" ? "is-contain" : ""}
+      />
+    );
   }
 
   return (

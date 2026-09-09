@@ -15,8 +15,8 @@ export const projects = [
     featured: true,
     track: "data",
     year: "2026",
-    image: null,
-    cover: "bars",
+    image: `${P}/joja.png`,
+    fit: "contain",
     repo: "https://github.com/cyrinezark/joja",
     stack: ["Python", "pandas", "Jupyter", "Docker", "pytest", "Sphinx"],
     // Chiffres réels tirés de l'analyse, voir notebooks/joja_eda.ipynb
@@ -76,8 +76,8 @@ export const projects = [
     featured: true,
     track: "data",
     year: "2026",
-    image: null,
-    cover: "book",
+    image: `${P}/alice.png`,
+    fit: "contain",
     repo: "https://github.com/cyrinezark/alice-in-wonderland",
     stack: ["Python", "spaCy", "gensim", "sumy", "NLTK", "uv"],
     // Chiffres vérifiables dans le code : src/services/ et src/bookworm.py

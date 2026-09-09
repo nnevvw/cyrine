@@ -116,7 +116,10 @@ export default function Projects({ t, language }) {
           </ol>
 
           {/* La clé force le rejeu des animations quand on change de projet. */}
-          <article className="p-sheet card" key={active.id}>
+          <article
+            className={`p-sheet card ${active.fit === "contain" ? "has-figure" : ""}`}
+            key={active.id}
+          >
             <div className="p-sheet-visual">
               <ProjectCover project={active} alt={copy.title} />
             </div>
