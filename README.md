@@ -1,58 +1,91 @@
-# Projet React : Portfolio de Cyrine Zarkouna
+# Portfolio — Cyrine Zarkouna
 
-Ce projet est développé avec React App.  
-Il inclut :
-    Parcours Professionnels
-    Projet réalisés 
-    Moyens de contact
+Portfolio personnel, orienté **data**. Application React (Create React App),
+bilingue français / anglais, déployée sur GitHub Pages.
 
-##  Structure du projet
-/public
-    /poulep
-/src
-    /components
-App.js
-index.js
-README.md
+👉 <https://cyrinezrk.github.io/portfolio>
 
-## Démarrer le projet
+## Démarrer
 
-Dans le répertoire du projet, vous pouvez exécuter :
+```bash
+npm install
+npm start        # http://localhost:3000/portfolio
+npm test         # tests de rendu
+npm run build    # build de production dans build/
+npm run deploy   # build + publication sur la branche gh-pages
+```
 
-`npm install` : Installe les dépendances nécessaires.
+> Node 18+ requis.
 
-`npm start` : Lance l’application en mode développement.  
+## Structure
 
-Ouvre [http://localhost:3000](http://localhost:3000) pour voir le résultat.  
+```
+src/
+├── data/content.js      # TOUT le contenu éditorial (FR + EN), un seul fichier
+├── theme.css            # design system : couleurs, type, ombres, animations
+├── hooks/useReveal.js   # apparition au scroll (IntersectionObserver)
+├── components/
+│   ├── Nav.js           # navigation fixe + bascule FR/EN
+│   ├── Hero.js          # titre, constellation animée, étoiles
+│   ├── Work.js          # projets data en avant + grille web filtrable
+│   ├── ProjectModal.js  # fiche projet détaillée
+│   ├── MiniChart.js     # barres horizontales animées
+│   ├── Counter.js       # chiffre qui s'incrémente à l'apparition
+│   ├── About.js         # parcours, compétences, hors écran
+│   ├── Contact.js       # formulaire Formspree
+│   └── Footer.js
+└── App.js               # assemblage + gestion de la langue
+```
 
-La page se recharge automatiquement lorsque vous modifiez le code.  
-Vous verrez aussi les éventuelles erreurs dans la console.
+## Ajouter ou modifier un projet
 
-`npm test` : Lance le mode interactif pour les tests.
+Tout se passe dans `src/data/content.js`. Aucun composant à toucher.
 
-Voir la section sur [exécution des tests](https://facebook.github.io/create-react-app/docs/running-tests) pour plus d’informations.
+```js
+{
+  id: "mon-projet",
+  featured: true,          // true → grande carte data en haut de section
+  track: "data",           // "data" | "ia" | "web" → sert au filtre
+  year: "2026",
+  image: `${P}/mon-projet.png`,   // fichier à déposer dans public/
+  repo: "https://github.com/…",   // ou link: pour un site en ligne
+  stack: ["Python", "pandas"],
+  stats: [                        // chiffres animés (cartes "featured")
+    { value: 3.2, suffix: "M", fr: "commandes", en: "orders" },
+  ],
+  chart: {                        // graphique en barres (cartes "featured")
+    unit: "%",
+    fr: "Légende en français",
+    en: "English caption",
+    series: [{ label: "produce", value: 75 }],
+  },
+  fr: { title, tagline, role, summary, highlights: [], finding, findingLabel },
+  en: { title, tagline, role, summary, highlights: [], finding, findingLabel },
+}
+```
 
-`npm run build` : Construit l’application pour la production dans le dossier `build`.  
-Optimise React pour la meilleure performance.  
+Les autres blocs de la page (`education`, `experience`, `skillGroups`,
+`personal`, et les libellés d'interface `ui`) vivent dans le même fichier.
 
-Le build est minifié et les noms de fichiers incluent des hashes.  
-L’application est prête à être déployée.
+## Choix de conception
 
-Voir la section sur [déploiement](https://facebook.github.io/create-react-app/docs/deployment) pour plus d’informations.
+- **Contenu séparé du rendu.** Les composants ne contiennent aucun texte ;
+  ils lisent `content.js`. Une traduction manquante se voit tout de suite.
+- **Pas de framework CSS.** Un design system en variables CSS
+  (`theme.css`) suffit et pèse moins lourd qu'une dépendance.
+- **Animations désactivables.** Tout est derrière
+  `prefers-reduced-motion: reduce`.
+- **Pas de capture d'écran pour les projets data.** Un projet d'analyse se
+  montre par ses chiffres et son résultat, pas par une image de notebook.
 
-## Fonctionnalités du projet
+## À faire
 
-- **RandomPhotos.js** : affiche une image à la fois aux bords de l’écran, positionnée aléatoirement.  
-  L’image est cliquable et redirige vers un lien externe.
-  
-- **ContactForm.js** : formulaire simple de contact (optionnel, selon extension du projet).
-
-## Ressources utiles
-
-- [Documentation Create React App](https://facebook.github.io/create-react-app/docs/getting-started)  
-- [React Documentation](https://reactjs.org/)  
-- [CSS Flexbox Guide](https://developer.mozilla.org/fr/docs/Learn/CSS/CSS_layout/Flexbox)
+- [ ] Brancher le projet **Alice in Borderland** (dépôt non disponible en local
+      lors de la refonte — la fiche est en place, il manque le contenu).
+- [ ] Vérifier l'adresse e-mail publique affichée dans `Hero.js` et
+      `Contact.js` (actuellement `contact@majoli.io`).
 
 ## Auteur
-Cyrine Zarkouna 
 
+Cyrine Zarkouna — [GitHub](https://github.com/cyrinezrk) ·
+[LinkedIn](https://www.linkedin.com/in/cyrine-zarkouna-6022301b1)

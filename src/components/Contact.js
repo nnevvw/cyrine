@@ -1,118 +1,117 @@
 import React from "react";
-import "./Contact.css";
 import { useForm, ValidationError } from "@formspree/react";
+import Reveal from "./Reveal";
+import "./Contact.css";
 
-// sous composant réutilisable
-function ContactContent({ state, handleSubmit, text }) {
-  return (
-    <form className="contact-form" onSubmit={handleSubmit}>
-      <div className="nom-mail">
-        <div>
-          <label htmlFor="name">
-            {text.nameLabel}
-            <input
-              id="name"
-              type="text"
-              name="name"
-              placeholder={text.namePlaceholder}
-              required
-            />
-          </label>
-
-          <label htmlFor="email">
-            Email :
-            <input
-              id="email"
-              type="email"
-              name="email"
-              placeholder={text.emailPlaceholder}
-              required
-            />
-          </label>
-          <ValidationError prefix="Email" field="email" errors={state.errors} />
-        </div>
-
-        <div className="reso2">
-          <a
-            href="https://www.linkedin.com/in/cyrine-zarkouna-6022301b1"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            <img
-              src={`${process.env.PUBLIC_URL}/linkedin2.png`}
-              className="sociallinkedin"
-              alt="LinkedIn"
-            />
-          </a>
-
-          <a
-            href="https://www.instagram.com/cyrine_zrk"
-            target="_blank"
-            rel="noopener noreferrer"
-            aria-label="Instagram"
-          >
-            <img
-              src={`${process.env.PUBLIC_URL}/instagram2.png`}
-              className="social-icon"
-              alt="Instagram"
-            />
-          </a>
-        </div>
-      </div>
-
-      <label htmlFor="message">
-        Message :
-        <textarea
-          id="message"
-          name="message"
-          placeholder={text.messagePlaceholder}
-          required
-        ></textarea>
-      </label>
-
-      <ValidationError prefix="Message" field="message" errors={state.errors} />
-
-      <button type="submit" disabled={state.submitting}>
-        {state.submitting ? text.sending : text.send}
-      </button>
-    </form>
-  );
-}
-
-// --- Composant principal ---
-export default function ContactForm({ language = 'fr' }) {
+export default function Contact({ t, language }) {
   const [state, handleSubmit] = useForm("xeorobow");
-  const texts = {
+
+  const labels = {
     fr: {
-      nameLabel: 'Qui êtes-vous ? :',
-      namePlaceholder: 'Votre nom',
-      emailPlaceholder: 'Votre email',
-      messagePlaceholder: 'Votre message',
-      sending: 'Envoi...',
-      send: 'Envoyer',
-      success: 'Merci !! Ton message a bien été envoyé',
+      name: "Votre nom",
+      email: "Votre email",
+      message: "Votre message",
+      namePh: "Comment vous appelez-vous ?",
+      emailPh: "pour que je puisse répondre",
+      messagePh: "Dites-moi tout…",
+      send: "Envoyer",
+      sending: "Envoi…",
+      successTitle: "C'est parti !",
+      successText: "Merci, votre message est bien arrivé. Je réponds sous 48 h.",
     },
     en: {
-      nameLabel: 'Who are you? :',
-      namePlaceholder: 'Your name',
-      emailPlaceholder: 'Your email',
-      messagePlaceholder: 'Your message',
-      sending: 'Sending...',
-      send: 'Send',
-      success: 'Thank you! Your message has been sent',
+      name: "Your name",
+      email: "Your email",
+      message: "Your message",
+      namePh: "What should I call you?",
+      emailPh: "so I can reply",
+      messagePh: "Tell me everything…",
+      send: "Send",
+      sending: "Sending…",
+      successTitle: "Off it goes!",
+      successText: "Thank you, your message came through. I reply within 48 h.",
     },
-  };
-  const text = texts[language];
-
-  if (state.succeeded) {
-    return <p>{text.success}</p>;
-  }
+  }[language];
 
   return (
-    <div className="contact-wrapper">
-      <div className="contact-container">
-        <ContactContent state={state} handleSubmit={handleSubmit} text={text} />
+    <section className="section contact" id="contact">
+      <div className="shell">
+        <div className="contact-card card">
+          <div className="contact-intro">
+            <Reveal>
+              <p className="eyebrow">{t.contactTitle}</p>
+              <h2 className="section-title">
+                {language === "fr" ? (
+                  <>Un jeu de données<br />à <span className="magic">explorer</span> ?</>
+                ) : (
+                  <>Got a dataset<br />to <span className="magic">explore</span>?</>
+                )}
+              </h2>
+              <p className="section-lead">{t.contactLead}</p>
+
+              <ul className="contact-links">
+                <li>
+                  <a href="mailto:contact@majoli.io">contact@majoli.io</a>
+                </li>
+                <li>
+                  <a href="https://www.linkedin.com/in/cyrine-zarkouna-6022301b1" target="_blank" rel="noopener noreferrer">
+                    LinkedIn
+                  </a>
+                </li>
+                <li>
+                  <a href="https://github.com/cyrinezrk" target="_blank" rel="noopener noreferrer">
+                    GitHub
+                  </a>
+                </li>
+              </ul>
+
+              <a
+                className="btn btn-ghost contact-cv"
+                href={`${process.env.PUBLIC_URL}/CVCyrine.pdf`}
+                download="Cyrine_Zarkouna_CV.pdf"
+              >
+                {t.downloadCv}
+              </a>
+            </Reveal>
+          </div>
+
+          <Reveal className="contact-form-wrap" delay={120}>
+            {state.succeeded ? (
+              <div className="contact-success">
+                <span className="success-mark" aria-hidden="true">✦</span>
+                <h3>{labels.successTitle}</h3>
+                <p>{labels.successText}</p>
+              </div>
+            ) : (
+              <form className="contact-form" onSubmit={handleSubmit}>
+                <label htmlFor="name">
+                  <span>{labels.name}</span>
+                  <input id="name" type="text" name="name" placeholder={labels.namePh} required />
+                </label>
+
+                <label htmlFor="email">
+                  <span>{labels.email}</span>
+                  <input id="email" type="email" name="email" placeholder={labels.emailPh} required />
+                </label>
+                <ValidationError prefix="Email" field="email" errors={state.errors} />
+
+                <label htmlFor="message">
+                  <span>{labels.message}</span>
+                  <textarea id="message" name="message" rows="5" placeholder={labels.messagePh} required />
+                </label>
+                <ValidationError prefix="Message" field="message" errors={state.errors} />
+
+                <button type="submit" className="btn btn-primary" disabled={state.submitting}>
+                  {state.submitting ? labels.sending : labels.send}
+                  <svg viewBox="0 0 16 16" aria-hidden="true">
+                    <path d="M3 8h10m0 0-4-4m4 4-4 4" />
+                  </svg>
+                </button>
+              </form>
+            )}
+          </Reveal>
+        </div>
       </div>
-    </div>
+    </section>
   );
 }

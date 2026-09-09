@@ -1,0 +1,314 @@
+/* ------------------------------------------------------------------ *
+   Design system — "pastel magique"
+   Un lilas très clair comme fond, du rose pour l'accent, beaucoup d'air.
+ * ------------------------------------------------------------------ */
+
+@import url("https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,300..700;1,9..144,300..700&family=Outfit:wght@300..800&family=Space+Grotesk:wght@400;500;700&display=swap");
+
+:root {
+  /* Fonds */
+  --bg: #fbf7ff;
+  --bg-soft: #f4ecff;
+  --surface: #ffffff;
+  --surface-2: #fdfaff;
+
+  /* Lilas / rose */
+  --lilac-50: #f6efff;
+  --lilac-100: #ece0ff;
+  --lilac-200: #dcc9ff;
+  --lilac-300: #c6aaff;
+  --lilac-400: #ab86f5;
+  --lilac-500: #8e63e6;
+  --lilac-600: #7546cc;
+
+  --pink-100: #ffe4f4;
+  --pink-200: #ffc9e8;
+  --pink-300: #ffa4d6;
+  --pink-400: #f77cc0;
+  --pink-500: #e15aa5;
+
+  --mint: #bff3e4;
+  --butter: #ffeec2;
+
+  /* Texte */
+  --ink: #2a1f3d;
+  --ink-soft: #5b4c73;
+  --ink-faint: #8b7da3;
+
+  /* Traits */
+  --line: #e9dcff;
+  --line-strong: #d9c6fb;
+
+  /* Ombres — toujours teintées violet, jamais du gris */
+  --shadow-sm: 0 2px 8px rgba(122, 78, 190, 0.06);
+  --shadow-md: 0 10px 30px rgba(122, 78, 190, 0.1);
+  --shadow-lg: 0 24px 60px rgba(122, 78, 190, 0.16);
+  --glow: 0 0 0 4px rgba(198, 170, 255, 0.28);
+
+  /* Rayons */
+  --r-sm: 10px;
+  --r-md: 18px;
+  --r-lg: 28px;
+  --r-xl: 36px;
+  --r-pill: 999px;
+
+  /* Type */
+  --font-display: "Fraunces", Georgia, serif;
+  --font-sans: "Outfit", system-ui, -apple-system, "Segoe UI", sans-serif;
+  --font-mono: "Space Grotesk", ui-monospace, monospace;
+
+  /* Rythme */
+  --page: 1180px;
+  --gutter: clamp(20px, 5vw, 56px);
+  --section-y: clamp(80px, 12vw, 150px);
+
+  --ease: cubic-bezier(0.22, 1, 0.36, 1);
+}
+
+* { box-sizing: border-box; }
+
+html { scroll-behavior: smooth; }
+
+body {
+  margin: 0;
+  background: var(--bg);
+  color: var(--ink);
+  font-family: var(--font-sans);
+  font-size: 17px;
+  line-height: 1.65;
+  font-weight: 350;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  overflow-x: hidden;
+}
+
+h1, h2, h3, h4 {
+  font-family: var(--font-sans);
+  font-weight: 600;
+  line-height: 1.1;
+  letter-spacing: -0.025em;
+  margin: 0;
+  color: var(--ink);
+}
+
+p { margin: 0; }
+a { color: inherit; }
+img { max-width: 100%; display: block; }
+
+button {
+  font: inherit;
+  color: inherit;
+  border: none;
+  background: none;
+  cursor: pointer;
+}
+
+::selection { background: var(--pink-200); color: var(--ink); }
+
+:focus-visible {
+  outline: none;
+  box-shadow: var(--glow);
+  border-radius: var(--r-sm);
+}
+
+/* --- Primitives partagées ------------------------------------------ */
+
+.shell {
+  width: 100%;
+  max-width: var(--page);
+  margin-inline: auto;
+  padding-inline: var(--gutter);
+}
+
+.section {
+  padding-block: var(--section-y);
+  position: relative;
+}
+
+/* Un mot mis en avant, en serif italique */
+.magic {
+  font-family: var(--font-display);
+  font-style: italic;
+  font-weight: 400;
+  background: linear-gradient(105deg, var(--lilac-500), var(--pink-400) 60%, var(--lilac-400));
+  -webkit-background-clip: text;
+  background-clip: text;
+  color: transparent;
+  padding-inline: 0.04em;
+}
+
+.eyebrow {
+  font-family: var(--font-mono);
+  font-size: 12px;
+  font-weight: 500;
+  letter-spacing: 0.16em;
+  text-transform: uppercase;
+  color: var(--lilac-500);
+  display: inline-flex;
+  align-items: center;
+  gap: 10px;
+}
+
+.eyebrow::before {
+  content: "";
+  width: 22px;
+  height: 1.5px;
+  border-radius: 2px;
+  background: linear-gradient(90deg, var(--pink-300), var(--lilac-300));
+}
+
+.section-title {
+  font-size: clamp(34px, 5.5vw, 58px);
+  margin-top: 18px;
+}
+
+.section-lead {
+  color: var(--ink-soft);
+  max-width: 54ch;
+  margin-top: 18px;
+  font-size: clamp(16px, 1.6vw, 19px);
+}
+
+.card {
+  background: var(--surface);
+  border: 1px solid var(--line);
+  border-radius: var(--r-lg);
+  box-shadow: var(--shadow-sm);
+  transition: transform 0.5s var(--ease), box-shadow 0.5s var(--ease),
+    border-color 0.5s var(--ease);
+}
+
+.chip {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  padding: 5px 12px;
+  border-radius: var(--r-pill);
+  background: var(--lilac-50);
+  border: 1px solid var(--line);
+  color: var(--lilac-600);
+  font-size: 13px;
+  font-weight: 450;
+  white-space: nowrap;
+}
+
+.btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 9px;
+  padding: 13px 26px;
+  border-radius: var(--r-pill);
+  font-size: 15px;
+  font-weight: 500;
+  text-decoration: none;
+  transition: transform 0.35s var(--ease), box-shadow 0.35s var(--ease),
+    background 0.35s var(--ease);
+}
+
+.btn-primary {
+  background: linear-gradient(120deg, var(--lilac-400), var(--pink-300));
+  color: #fff;
+  box-shadow: 0 8px 22px rgba(171, 134, 245, 0.38);
+}
+
+.btn-primary:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 14px 32px rgba(171, 134, 245, 0.46);
+}
+
+.btn-ghost {
+  background: var(--surface);
+  border: 1px solid var(--line-strong);
+  color: var(--ink);
+}
+
+.btn-ghost:hover {
+  transform: translateY(-2px);
+  box-shadow: var(--shadow-md);
+  background: var(--lilac-50);
+}
+
+/* --- Décor : aurores + poussière d'étoiles ------------------------- */
+
+.aurora {
+  position: fixed;
+  inset: 0;
+  z-index: -2;
+  overflow: hidden;
+  pointer-events: none;
+}
+
+.aurora span {
+  position: absolute;
+  border-radius: 50%;
+  filter: blur(70px);
+  opacity: 0.5;
+}
+
+.aurora .a1 {
+  width: 46vw; height: 46vw;
+  top: -14vw; left: -8vw;
+  background: radial-gradient(circle, var(--lilac-200), transparent 68%);
+  animation: drift-a 26s ease-in-out infinite;
+}
+.aurora .a2 {
+  width: 40vw; height: 40vw;
+  top: 22vh; right: -12vw;
+  background: radial-gradient(circle, var(--pink-200), transparent 68%);
+  animation: drift-b 32s ease-in-out infinite;
+}
+.aurora .a3 {
+  width: 36vw; height: 36vw;
+  bottom: -10vw; left: 24vw;
+  background: radial-gradient(circle, var(--mint), transparent 70%);
+  opacity: 0.35;
+  animation: drift-c 38s ease-in-out infinite;
+}
+
+@keyframes drift-a {
+  0%, 100% { transform: translate(0, 0) scale(1); }
+  50% { transform: translate(6vw, 5vh) scale(1.12); }
+}
+@keyframes drift-b {
+  0%, 100% { transform: translate(0, 0) scale(1); }
+  50% { transform: translate(-7vw, 7vh) scale(1.08); }
+}
+@keyframes drift-c {
+  0%, 100% { transform: translate(0, 0) scale(1); }
+  50% { transform: translate(5vw, -6vh) scale(1.15); }
+}
+
+/* Grain très léger pour casser le dégradé plat */
+.grain {
+  position: fixed;
+  inset: 0;
+  z-index: -1;
+  pointer-events: none;
+  opacity: 0.35;
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='140' height='140'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.85' numOctaves='3'/%3E%3C/filter%3E%3Crect width='140' height='140' filter='url(%23n)' opacity='0.32'/%3E%3C/svg%3E");
+}
+
+/* --- Apparition au scroll ------------------------------------------ */
+
+.reveal {
+  opacity: 0;
+  transform: translateY(26px);
+  transition: opacity 0.8s var(--ease), transform 0.8s var(--ease);
+  transition-delay: var(--delay, 0ms);
+}
+
+.reveal.is-in {
+  opacity: 1;
+  transform: none;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  html { scroll-behavior: auto; }
+  *, *::before, *::after {
+    animation-duration: 0.001ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.001ms !important;
+  }
+  .reveal { opacity: 1; transform: none; }
+}
