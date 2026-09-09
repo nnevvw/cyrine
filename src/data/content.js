@@ -158,14 +158,32 @@ export const projects = [
       tagline: "Suivi de performance et process internes",
       role: "Cheffe de projet web en alternance",
       summary:
-        "Maintenance du site, suivi des KPI, automatisation des process internes et service après-vente. C'est là que j'ai commencé à passer de « faire le site » à « lire ce que le site raconte ».",
+        "Marque de lingerie et de maillots de bain, avec une boutique en ligne à faire tourner tous les jours. J'ai tenu la maintenance du site, le suivi des indicateurs, l'automatisation des process internes et le service après-vente.",
+      highlights: [
+        "Suivi hebdomadaire des indicateurs de la boutique : trafic, taux de conversion, panier moyen, produits qui partent et produits qui dorment.",
+        "Automatisation des tableaux de suivi sur Drive, pour arrêter de recopier à la main ce qu'un tableur sait aller chercher.",
+        "Service après-vente au quotidien : ce sont les messages clients qui m'ont appris à quoi ressemble un problème avant qu'il apparaisse dans les chiffres.",
+        "Maintenance et corrections du site, en lien direct avec l'équipe marketing.",
+      ],
+      finding:
+        "C'est l'alternance qui m'a fait bifurquer. Je suis arrivée pour faire le site, je suis repartie en voulant surtout comprendre ce qu'il racontait : quels produits marchent, pourquoi une page convertit mal, ce qu'un chiffre en baisse veut réellement dire. La data a cessé d'être une matière scolaire.",
+      findingLabel: "Pourquoi ça compte",
     },
     en: {
       title: "We Are Jolies",
       tagline: "Performance tracking and internal process",
       role: "Web project manager, apprenticeship",
       summary:
-        "Site maintenance, KPI tracking, internal process automation and customer support. This is where I started moving from 'building the site' to 'reading what the site is telling us'.",
+        "A lingerie and swimwear brand with an online shop to keep running every day. I handled site maintenance, indicator tracking, internal process automation and customer support.",
+      highlights: [
+        "Weekly tracking of the shop's indicators: traffic, conversion rate, average basket, which products move and which ones sit still.",
+        "Automated the tracking sheets on Drive, to stop copying by hand what a spreadsheet can fetch on its own.",
+        "Daily customer support: it was the customer messages that taught me what a problem looks like before it shows up in the numbers.",
+        "Site maintenance and fixes, working directly with the marketing team.",
+      ],
+      finding:
+        "This apprenticeship is what turned me. I arrived to build the site and left wanting mostly to understand what it was saying: which products work, why a page converts badly, what a falling number actually means. Data stopped being a school subject.",
+      findingLabel: "Why it matters",
     },
   },
   {
@@ -300,28 +318,6 @@ export const projects = [
         "A platform encouraging good ecological habits through playful mechanics and recurring challenges. A lot of product thinking before the first line of code.",
     },
   },
-  {
-    id: "hangman",
-    track: "web",
-    year: "2025",
-    image: `${P}/hangman.png`,
-    link: null,
-    stack: ["Python"],
-    fr: {
-      title: "Hangman",
-      tagline: "Piscine Python, Epitech",
-      role: "Projet individuel",
-      summary:
-        "Le jeu du pendu, réalisé pendant la piscine Python d'Epitech. Petit projet, mais le premier où j'ai pensé structure et lisibilité plutôt que « ça marche ».",
-    },
-    en: {
-      title: "Hangman",
-      tagline: "Python pool, Epitech",
-      role: "Solo project",
-      summary:
-        "The hangman game, built during Epitech's Python pool. A small project, but the first where I thought about structure and readability rather than 'it runs'.",
-    },
-  },
 ];
 
 export const education = [
@@ -429,9 +425,9 @@ export const skillGroups = [
 ];
 
 export const personal = [
-  { id: "bac", img: `${P}/bac.png`, fr: "Bac général : Maths, Physique-Chimie, NSI.", en: "French baccalauréat: Maths, Physics-Chemistry, Computer Science." },
-  { id: "theatre", img: `${P}/theatre.png`, fr: "6 ans de théâtre. Parler devant une salle ne me fait plus peur, présenter une analyse non plus.", en: "6 years of theatre. Speaking to a room doesn't scare me, and neither does presenting an analysis." },
-  { id: "chant", img: `${P}/chant.png`, fr: "7 ans de chant, entre Tunis et la France.", en: "7 years of singing, between Tunis and France." },
+  { id: "bac", img: `${P}/bac.svg`, fr: "Bac général : Maths, Physique-Chimie, NSI.", en: "French baccalauréat: Maths, Physics-Chemistry, Computer Science." },
+  { id: "theatre", img: `${P}/theatre.svg`, fr: "6 ans de théâtre. Parler devant une salle ne me fait plus peur, présenter une analyse non plus.", en: "6 years of theatre. Speaking to a room doesn't scare me, and neither does presenting an analysis." },
+  { id: "chant", img: `${P}/chant.svg`, fr: "7 ans de chant, entre Tunis et la France.", en: "7 years of singing, between Tunis and France." },
   { id: "sport", img: `${P}/sport.svg`, fr: "Je vais à la salle de sport pour ma santé, pour la discipline, et pour une meilleure version de moi-même.", en: "I go to the gym for my health, for the discipline, and for a better version of myself." },
 ];
 
@@ -441,8 +437,8 @@ export const ui = {
     heroLead:
       "Je viens du développement web, je vais vers la data. Ce qui m'intéresse n'est pas le graphique, c'est la décision qu'il permet de prendre.",
     availability: "Je suis en formation en alternance dans la tech, le digital et l'informatique. Ouverte aux contrats d'apprentissage ou de professionnalisation, aux stages alternés, comme aux CDD ou CDI à temps partiel.",
-    heroBefore: "Je transforme des données en",
-    heroRotating: ["décisions", "histoire", "cap", "évidence"],
+    heroBefore: "Dans un jeu de données, je cherche",
+    heroRotating: ["l'histoire", "le motif", "la décision", "la surprise"],
     heroCtaWork: "Voir mes projets",
     heroCtaContact: "Me contacter",
     scroll: "Défiler",
@@ -483,8 +479,8 @@ export const ui = {
     heroLead:
       "I come from web development, I'm heading into data. What interests me isn't the chart, it's the decision it makes possible.",
     availability: "I am training through an apprenticeship in tech, digital and computer science. Open to apprenticeship or professional-training contracts, alternating internships, as well as part-time fixed-term or permanent roles.",
-    heroBefore: "I turn data into",
-    heroRotating: ["decisions", "a story", "a direction", "clarity"],
+    heroBefore: "In a dataset, I look for",
+    heroRotating: ["the story", "the pattern", "the decision", "the surprise"],
     heroCtaWork: "See my work",
     heroCtaContact: "Get in touch",
     scroll: "Scroll",

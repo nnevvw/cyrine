@@ -180,7 +180,8 @@
 
 .p-sheet-body {
   padding: clamp(20px, 2.4vw, 32px);
-  padding-right: clamp(14px, 1.8vw, 24px);
+  padding-right: clamp(20px, 2.4vw, 32px);
+  padding-bottom: 52px;
   overflow-y: auto;
   max-height: min(60svh, 560px);
   scrollbar-width: thin;

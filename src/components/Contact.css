@@ -142,3 +142,36 @@
 @media (max-width: 860px) {
   .contact-card { grid-template-columns: 1fr; }
 }
+
+/* --- Ce que je cherche ----------------------------------------------- */
+
+.availability {
+  display: flex;
+  align-items: flex-start;
+  gap: 11px;
+  margin-top: 22px;
+  padding: 14px 18px;
+  border-radius: var(--r-md);
+  background: linear-gradient(140deg, var(--lilac-50), var(--pink-100) 190%);
+  border: 1px solid var(--line);
+  font-size: 13.5px;
+  line-height: 1.6;
+  color: var(--ink-soft);
+}
+
+.availability-dot {
+  flex: none;
+  width: 8px;
+  height: 8px;
+  margin-top: 7px;
+  border-radius: 50%;
+  background: #56c596;
+  box-shadow: 0 0 0 0 rgba(86, 197, 150, 0.55);
+  animation: pulse-dot 2.4s ease-out infinite;
+}
+
+@keyframes pulse-dot {
+  0% { box-shadow: 0 0 0 0 rgba(86, 197, 150, 0.55); }
+  70% { box-shadow: 0 0 0 9px rgba(86, 197, 150, 0); }
+  100% { box-shadow: 0 0 0 0 rgba(86, 197, 150, 0); }
+}

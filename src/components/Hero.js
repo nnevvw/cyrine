@@ -181,11 +181,6 @@ export default function Hero({ t }) {
           </a>
         </div>
 
-        <p className="hero-availability">
-          <span className="hero-availability-dot" aria-hidden="true" />
-          {t.availability}
-        </p>
-
         <ul className="hero-social">
           <li>
             <a href="https://github.com/cyrinezark" target="_blank" rel="noopener noreferrer" aria-label="GitHub">

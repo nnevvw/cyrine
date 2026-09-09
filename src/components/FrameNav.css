@@ -1,7 +1,7 @@
 .frame-nav {
   position: fixed;
   top: 50%;
-  right: clamp(12px, 1.8vw, 26px);
+  left: clamp(12px, 1.6vw, 24px);
   translate: 0 -50%;
   z-index: 55;
 }
@@ -14,13 +14,15 @@
   gap: 14px;
 }
 
+/* L'étoile est le premier élément et ne bouge jamais : le libellé, lui, est
+   sorti du flux. Sans ça, un libellé plus long décalait son étoile. */
 .frame-nav a {
+  position: relative;
   display: flex;
   align-items: center;
-  justify-content: flex-end;
-  gap: 10px;
   text-decoration: none;
   padding: 3px;
+  width: 24px;
 }
 
 /* Une étoile par écran. La taille de la boîte ne change jamais, sinon les
@@ -54,13 +56,16 @@
 }
 
 .fn-label {
+  position: absolute;
+  left: 28px;
+  top: 50%;
+  translate: -6px -50%;
   font-family: var(--font-mono);
   font-size: 10.5px;
   letter-spacing: 0.12em;
   text-transform: uppercase;
   color: var(--ink-faint);
   opacity: 0;
-  translate: 8px 0;
   transition: opacity 0.35s var(--ease), translate 0.35s var(--ease);
   pointer-events: none;
   white-space: nowrap;
@@ -69,7 +74,7 @@
 .frame-nav a:hover .fn-label,
 .frame-nav a.is-active .fn-label {
   opacity: 1;
-  translate: 0 0;
+  translate: 0 -50%;
 }
 
 .frame-nav a.is-active .fn-label { color: var(--lilac-600); }

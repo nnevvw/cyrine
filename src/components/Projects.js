@@ -15,9 +15,14 @@ export default function Projects({ t, language }) {
   const [ref, inView] = useInView(0.3);
   const listRef = useRef(null);
 
-  // Les projets data ouvrent la liste : c'est le message de la page.
+  // Un projet qu'on ne peut pas aller voir n'a rien à faire ici : il faut un
+  // site en ligne ou un dépôt. Ajouter `link` ou `repo` le fait réapparaître.
+  // Les projets data ouvrent ensuite la liste : c'est le message de la page.
   const ordered = useMemo(
-    () => [...projects].sort((a, b) => Number(!!b.featured) - Number(!!a.featured)),
+    () =>
+      projects
+        .filter((p) => p.link || p.repo)
+        .sort((a, b) => Number(!!b.featured) - Number(!!a.featured)),
     []
   );
 

@@ -49,6 +49,11 @@ export default function Contact({ t, language }) {
               </h2>
               <p className="section-lead">{t.contactLead}</p>
 
+              <p className="availability">
+                <span className="availability-dot" aria-hidden="true" />
+                {t.availability}
+              </p>
+
               <ul className="contact-links">
                 <li>
                   <a href="mailto:cyrine.zarkouna@gmail.com">cyrine.zarkouna@gmail.com</a>
