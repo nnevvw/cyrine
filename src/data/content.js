@@ -427,7 +427,7 @@ export const skillGroups = [
 export const personal = [
   { id: "bac", img: `${P}/bac.svg`, fr: "Bac général : Maths, Physique-Chimie, NSI.", en: "French baccalauréat: Maths, Physics-Chemistry, Computer Science." },
   { id: "theatre", img: `${P}/theatre.svg`, fr: "6 ans de théâtre. Parler devant une salle ne me fait plus peur, présenter une analyse non plus.", en: "6 years of theatre. Speaking to a room doesn't scare me, and neither does presenting an analysis." },
-  { id: "chant", img: `${P}/chant.svg`, fr: "7 ans de chant, entre Tunis et la France.", en: "7 years of singing, between Tunis and France." },
+  { id: "chant", img: `${P}/chant.svg`, fr: "7 ans de chant.", en: "7 years of singing." },
   { id: "sport", img: `${P}/sport.svg`, fr: "Je vais à la salle de sport pour ma santé, pour la discipline, et pour une meilleure version de moi-même.", en: "I go to the gym for my health, for the discipline, and for a better version of myself." },
 ];
 
