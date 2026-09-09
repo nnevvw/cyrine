@@ -35,28 +35,30 @@
   margin-right: auto;
 }
 
+/* Le logo du site est la favicon : on la garde telle quelle. */
 .nav-mark {
-  width: 26px;
-  height: 26px;
-  border-radius: 9px;
-  background: linear-gradient(135deg, var(--lilac-300), var(--pink-300));
-  box-shadow: 0 4px 12px rgba(171, 134, 245, 0.4);
-  position: relative;
+  width: 32px;
+  height: 32px;
   flex: none;
-  animation: mark-pulse 6s ease-in-out infinite;
+  display: grid;
+  place-items: center;
+  border-radius: 11px;
+  background: var(--surface);
+  border: 1px solid var(--line);
+  box-shadow: var(--shadow-sm);
+  overflow: hidden;
+  transition: transform 0.4s var(--ease), box-shadow 0.4s var(--ease);
 }
 
-.nav-mark::after {
-  content: "";
-  position: absolute;
-  inset: 7px;
-  border-radius: 4px;
-  background: rgba(255, 255, 255, 0.85);
+.nav-mark img {
+  width: 84%;
+  height: 84%;
+  object-fit: contain;
 }
 
-@keyframes mark-pulse {
-  0%, 100% { transform: rotate(0deg); }
-  50% { transform: rotate(90deg); border-radius: 13px; }
+.nav-brand:hover .nav-mark {
+  transform: rotate(-8deg) scale(1.06);
+  box-shadow: var(--shadow-md);
 }
 
 .nav-links {

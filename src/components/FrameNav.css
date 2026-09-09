@@ -23,23 +23,34 @@
   padding: 3px;
 }
 
-.fn-dot {
-  width: 9px;
-  height: 9px;
-  border-radius: 50%;
-  border: 1.5px solid var(--line-strong);
-  background: transparent;
-  transition: all 0.4s var(--ease);
+/* Une étoile par écran. La taille de la boîte ne change jamais, sinon les
+   repères ne seraient plus alignés : seul le contenu grandit. */
+.fn-star {
+  width: 18px;
+  height: 18px;
+  flex: none;
+  display: grid;
+  place-items: center;
 }
 
-.frame-nav a:hover .fn-dot { border-color: var(--lilac-400); transform: scale(1.25); }
+.fn-star svg {
+  width: 10px;
+  height: 10px;
+  fill: var(--lilac-400);
+  opacity: 0.55;
+  transition: fill 0.4s var(--ease), transform 0.45s var(--ease);
+}
 
-.frame-nav a.is-active .fn-dot {
-  background: linear-gradient(135deg, var(--lilac-400), var(--pink-300));
-  border-color: transparent;
-  box-shadow: 0 0 0 4px rgba(198, 170, 255, 0.24);
-  height: 24px;
-  border-radius: var(--r-pill);
+.frame-nav a:hover .fn-star svg {
+  fill: var(--lilac-400);
+  transform: scale(1.2) rotate(20deg);
+}
+
+.frame-nav a.is-active .fn-star svg {
+  fill: var(--pink-400);
+  opacity: 1;
+  transform: scale(1.65) rotate(0deg);
+  filter: drop-shadow(0 0 5px rgba(247, 124, 192, 0.55));
 }
 
 .fn-label {

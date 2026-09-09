@@ -40,7 +40,11 @@ export default function FrameNav({ frames }) {
               className={active === id ? "is-active" : ""}
               aria-current={active === id ? "true" : undefined}
             >
-              <span className="fn-dot" aria-hidden="true" />
+              <span className="fn-star" aria-hidden="true">
+                <svg viewBox="0 0 24 24">
+                  <path d="M12 0c.6 6.4 5 10.8 12 12-7 1.2-11.4 5.6-12 12-.6-6.4-5-10.8-12-12 7-1.2 11.4-5.6 12-12Z" />
+                </svg>
+              </span>
               <span className="fn-label">{label}</span>
             </a>
           </li>

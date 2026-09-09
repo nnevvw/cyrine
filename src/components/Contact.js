@@ -59,7 +59,7 @@ export default function Contact({ t, language }) {
                   </a>
                 </li>
                 <li>
-                  <a href="https://github.com/cyrinezrk" target="_blank" rel="noopener noreferrer">
+                  <a href="https://github.com/cyrinezark" target="_blank" rel="noopener noreferrer">
                     GitHub
                   </a>
                 </li>

@@ -12,7 +12,7 @@
 
 .hero-title {
   margin-top: 18px;
-  font-size: clamp(52px, 11.5vw, 168px);
+  font-size: clamp(46px, min(11.5vw, 17vh), 168px);
   line-height: 0.9;
   letter-spacing: -0.045em;
   font-weight: 500;
@@ -47,7 +47,7 @@
 
 .hero-phrase {
   margin-top: 22px;
-  font-size: clamp(20px, 2.6vw, 32px);
+  font-size: clamp(19px, min(2.6vw, 3.6vh), 32px);
   font-weight: 300;
   color: var(--ink);
   opacity: 0;
@@ -79,7 +79,7 @@
 }
 
 .hero-lead {
-  margin-top: 22px;
+  margin-top: clamp(14px, 2vh, 22px);
   max-width: 48ch;
   font-size: clamp(16px, 1.5vw, 19px);
   color: var(--ink-soft);
@@ -91,7 +91,7 @@
   display: flex;
   flex-wrap: wrap;
   gap: 13px;
-  margin-top: 34px;
+  margin-top: clamp(20px, 3vh, 34px);
   opacity: 0;
   animation: rise 1s var(--ease) 0.78s forwards;
 }
@@ -114,9 +114,9 @@
   gap: 12px;
   list-style: none;
   padding: 0;
-  margin: 38px 0 0;
+  margin: clamp(20px, 3vh, 38px) 0 0;
   opacity: 0;
-  animation: rise 1s var(--ease) 0.9s forwards;
+  animation: rise 1s var(--ease) 0.96s forwards;
 }
 
 .hero-social a {
@@ -298,4 +298,41 @@
 @media (max-width: 900px) {
   .hero-scroll { display: none; }
   .blob.b3 { display: none; }
+}
+
+/* --- Ce que je cherche ----------------------------------------------- */
+
+.hero-availability {
+  display: flex;
+  align-items: flex-start;
+  gap: 11px;
+  max-width: 56ch;
+  margin-top: clamp(16px, 2.4vh, 26px);
+  padding: 13px 18px;
+  border-radius: var(--r-md);
+  background: rgba(255, 255, 255, 0.62);
+  border: 1px solid var(--line);
+  backdrop-filter: blur(8px);
+  -webkit-backdrop-filter: blur(8px);
+  font-size: 14px;
+  color: var(--ink-soft);
+  opacity: 0;
+  animation: rise 1s var(--ease) 0.84s forwards;
+}
+
+.hero-availability-dot {
+  flex: none;
+  width: 8px;
+  height: 8px;
+  margin-top: 7px;
+  border-radius: 50%;
+  background: #56c596;
+  box-shadow: 0 0 0 0 rgba(86, 197, 150, 0.55);
+  animation: pulse-dot 2.4s ease-out infinite;
+}
+
+@keyframes pulse-dot {
+  0% { box-shadow: 0 0 0 0 rgba(86, 197, 150, 0.55); }
+  70% { box-shadow: 0 0 0 9px rgba(86, 197, 150, 0); }
+  100% { box-shadow: 0 0 0 0 rgba(86, 197, 150, 0); }
 }

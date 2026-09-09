@@ -71,7 +71,18 @@
 html {
   scroll-behavior: smooth;
   scroll-snap-type: y mandatory;
+  scrollbar-width: thin;
+  scrollbar-color: var(--line-strong) transparent;
 }
+
+::-webkit-scrollbar { width: 9px; height: 9px; }
+::-webkit-scrollbar-track { background: transparent; }
+::-webkit-scrollbar-thumb {
+  background: var(--line-strong);
+  border-radius: var(--r-pill);
+  border: 2px solid var(--bg);
+}
+::-webkit-scrollbar-thumb:hover { background: var(--lilac-300); }
 
 body {
   margin: 0;
@@ -146,9 +157,11 @@ h1, h2, h3, h4, p, li, span, strong, em, blockquote, figcaption, label, td, th {
   scroll-snap-stop: always;
   display: flex;
   flex-direction: column;
-  justify-content: center;
+  /* `safe` : si le contenu dépasse, il s'aligne en haut plutôt que d'être
+     rogné des deux côtés par le centrage. */
+  justify-content: safe center;
   padding-block: calc(var(--nav-h) + 26px) 74px;
-  overflow: hidden;
+  overflow: clip;
 }
 
 .frame-inner {

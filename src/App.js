@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from "react";
 import Nav from "./components/Nav";
 import FrameNav from "./components/FrameNav";
+import StarField from "./components/StarField";
 import Hero from "./components/Hero";
 import About from "./components/About";
 import Projects from "./components/Projects";
@@ -50,6 +51,7 @@ export default function App() {
         <span className="a3" />
       </div>
       <div className="grain" aria-hidden="true" />
+      <StarField />
 
       <a className="skip-link" href="#about">
         {language === "fr" ? "Aller au contenu" : "Skip to content"}

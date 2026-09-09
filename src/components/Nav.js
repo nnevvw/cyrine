@@ -49,7 +49,9 @@ export default function Nav({ t, language, onToggleLanguage }) {
     <header className={`nav ${scrolled ? "is-scrolled" : ""} ${open ? "is-open" : ""}`}>
       <div className="nav-inner shell">
         <a href="#top" className="nav-brand" onClick={go("top")}>
-          <span className="nav-mark" aria-hidden="true" />
+          <span className="nav-mark">
+            <img src={`${process.env.PUBLIC_URL}/logo.png`} alt="" />
+          </span>
           <span className="nav-name">Cyrine&nbsp;Zarkouna</span>
         </a>
 

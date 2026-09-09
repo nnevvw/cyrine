@@ -17,9 +17,9 @@ export const projects = [
     year: "2026",
     image: null,
     cover: "bars",
-    repo: "https://github.com/cyrinezrk/joja",
+    repo: "https://github.com/cyrinezark/joja",
     stack: ["Python", "pandas", "Jupyter", "Docker", "pytest", "Sphinx"],
-    // Chiffres réels tirés de l'analyse — voir notebooks/joja_eda.ipynb
+    // Chiffres réels tirés de l'analyse, voir notebooks/joja_eda.ipynb
     stats: [
       { value: 3.2, suffix: "M", fr: "commandes analysées", en: "orders analysed" },
       { value: 200, suffix: "k", fr: "clients", en: "customers" },
@@ -45,13 +45,13 @@ export const projects = [
       summary:
         "Analyse exploratoire d'un jeu de données anonymisé de plus de 3 millions de commandes de courses en ligne. Le but n'était pas d'empiler des graphiques mais de tenir un fil : comprendre ce qui déclenche une commande, puis ce qui fait revenir un client.",
       highlights: [
-        "Pipeline de chargement typé avec cache Parquet — les CSV bruts ne sont lus qu'une fois, le notebook redémarre en secondes.",
+        "Pipeline de chargement typé avec cache Parquet : les CSV bruts ne sont lus qu'une fois, le notebook redémarre en secondes.",
         "Logique réutilisable sortie du notebook vers un package `src/joja/` testé avec pytest et documenté avec Sphinx.",
         "Analyse du lift entre rayons : l'intuition vin/fromage ne tient pas, les vraies associations sortent des données.",
-        "Qualité des données vérifiée avant analyse — 6,41 % de valeurs manquantes expliquées, pas masquées.",
+        "Qualité des données vérifiée avant analyse : 6,41 % de valeurs manquantes expliquées, pas masquées.",
       ],
       finding:
-        "JOJA attire massivement grâce au frais — `produce` pèse 9,5 M d'articles et apparaît dans 75 % des commandes — mais c'est le rayon au plus faible réachat du top 4 (49 %). Les produits d'appel ne construisent pas la fidélité ; les laitiers (68 % de pénétration, 67 % de réachat) le font, et ils sont sous-exploités.",
+        "JOJA attire massivement grâce au frais : `produce` pèse 9,5 M d'articles et apparaît dans 75 % des commandes, mais c'est le rayon au plus faible réachat du top 4 (49 %). Les produits d'appel ne construisent pas la fidélité ; les laitiers (68 % de pénétration, 67 % de réachat) le font, et ils sont sous-exploités.",
       findingLabel: "Ce que les données ont dit",
     },
     en: {
@@ -61,13 +61,13 @@ export const projects = [
       summary:
         "Exploratory analysis of an anonymised dataset of 3M+ online grocery orders. The goal was not to stack charts but to hold a thread: understand what triggers an order, then what brings a customer back.",
       highlights: [
-        "Typed loading pipeline with a Parquet cache — raw CSVs are read once, the notebook restarts in seconds.",
+        "Typed loading pipeline with a Parquet cache: raw CSVs are read once, the notebook restarts in seconds.",
         "Reusable logic pulled out of the notebook into a `src/joja/` package, tested with pytest and documented with Sphinx.",
         "Lift analysis across aisles: the obvious wine/cheese pairing does not hold, the real associations come from the data.",
-        "Data quality checked before analysis — 6.41% missing values explained, not hidden.",
+        "Data quality checked before analysis: 6.41% missing values explained, not hidden.",
       ],
       finding:
-        "JOJA attracts massively through fresh produce — `produce` accounts for 9.5M items and appears in 75% of orders — yet it has the weakest reorder rate of the top 4 departments (49%). Loss leaders don't build loyalty; dairy does (68% penetration, 67% reorder), and it is underused.",
+        "JOJA attracts massively through fresh produce: `produce` accounts for 9.5M items and appears in 75% of orders, yet it has the weakest reorder rate of the top 4 departments (49%). Loss leaders don't build loyalty; dairy does (68% penetration, 67% reorder), and it is underused.",
       findingLabel: "What the data said",
     },
   },
@@ -96,7 +96,7 @@ export const projects = [
       highlights: [
         "Extraction des personnages et des lieux par reconnaissance d'entités nommées (spaCy), en filtrant les étiquettes PERSON, LOC, FAC et GPE.",
         "Détection des thèmes par LDA (gensim) : le livre est découpé en sections, chacune devient un document du corpus.",
-        "Résumé automatique avec sumy — LSA, Luhn et LexRank implémentés côte à côte pour pouvoir les comparer.",
+        "Résumé automatique avec sumy : LSA, Luhn et LexRank implémentés côte à côte pour pouvoir les comparer.",
         "Profil de vocabulaire en cinq mesures : occurrences, formes uniques, ratio type/token, longueur et fréquence moyennes.",
         "Téléchargement et nettoyage des textes Gutenberg : en-tête et pied de page retirés par expression régulière avant toute analyse.",
       ],
@@ -114,7 +114,7 @@ export const projects = [
       highlights: [
         "Characters and locations extracted through named-entity recognition (spaCy), filtering the PERSON, LOC, FAC and GPE labels.",
         "Theme detection via LDA (gensim): the book is split into sections, each becoming a document in the corpus.",
-        "Automatic summarisation with sumy \u2014 LSA, Luhn and LexRank implemented side by side so they can be compared.",
+        "Automatic summarisation with sumy: LSA, Luhn and LexRank implemented side by side so they can be compared.",
         "Vocabulary profile in five measures: tokens, unique types, type/token ratio, mean word length and mean frequency.",
         "Gutenberg texts downloaded and cleaned: legal header and footer stripped by regex before any analysis runs.",
       ],
@@ -134,14 +134,14 @@ export const projects = [
     fr: {
       title: "ChatGPT × Majoli",
       tagline: "Générer 200 pages partenaires sans les écrire",
-      role: "Alternance — Majoli",
+      role: "Alternance chez Majoli",
       summary:
         "Automatisation de la rédaction des descriptions pour les pages partenaires de domiciliation. J'ai conçu un prompt unique, paramétré par les données de chaque partenaire, capable de produire un texte cohérent et non répétitif à l'échelle du catalogue.",
     },
     en: {
       title: "ChatGPT × Majoli",
       tagline: "Generating 200 partner pages without writing them",
-      role: "Apprenticeship — Majoli",
+      role: "Apprenticeship at Majoli",
       summary:
         "Automated copywriting for the business-address partner pages. I designed a single prompt, parameterised by each partner's data, able to produce consistent and non-repetitive text at catalogue scale.",
     },
@@ -156,14 +156,14 @@ export const projects = [
     fr: {
       title: "We Are Jolies",
       tagline: "Suivi de performance et process internes",
-      role: "Cheffe de projet web — alternance",
+      role: "Cheffe de projet web en alternance",
       summary:
         "Maintenance du site, suivi des KPI, automatisation des process internes et service après-vente. C'est là que j'ai commencé à passer de « faire le site » à « lire ce que le site raconte ».",
     },
     en: {
       title: "We Are Jolies",
       tagline: "Performance tracking and internal process",
-      role: "Web project manager — apprenticeship",
+      role: "Web project manager, apprenticeship",
       summary:
         "Site maintenance, KPI tracking, internal process automation and customer support. This is where I started moving from 'building the site' to 'reading what the site is telling us'.",
     },
@@ -246,14 +246,14 @@ export const projects = [
       tagline: "Location entre particuliers et pros",
       role: "Admin & pages catalogue",
       summary:
-        "Plateforme de location de produits, de quelques heures à plusieurs mois. J'ai pris en charge l'administration et les pages listant les produits — gestion de base de données et workflows.",
+        "Plateforme de location de produits, de quelques heures à plusieurs mois. J'ai pris en charge l'administration et les pages listant les produits : gestion de base de données et workflows.",
     },
     en: {
       title: "Locatio",
       tagline: "Renting between individuals and pros",
       role: "Admin & catalogue pages",
       summary:
-        "A product rental platform, from a few hours to several months. I owned the admin side and the product listing pages — database management and workflows.",
+        "A product rental platform, from a few hours to several months. I owned the admin side and the product listing pages: database management and workflows.",
     },
   },
   {
@@ -266,14 +266,14 @@ export const projects = [
     fr: {
       title: "CogSpace",
       tagline: "Sensibilisation écologique gamifiée",
-      role: "Hackathon Institut G4 — équipe",
+      role: "Hackathon Institut G4, en équipe",
       summary:
         "Une semaine intensive en équipe : plateforme de sensibilisation aux gestes écologiques avec défis générés par IA, système de récompenses et classements.",
     },
     en: {
       title: "CogSpace",
       tagline: "Gamified eco-awareness",
-      role: "Institut G4 hackathon — team",
+      role: "Institut G4 hackathon, in a team",
       summary:
         "An intensive team week: an eco-habits awareness platform with AI-generated challenges, a reward system and leaderboards.",
     },
@@ -305,7 +305,7 @@ export const projects = [
     track: "web",
     year: "2025",
     image: `${P}/hangman.png`,
-    link: "https://github.com/cyrinezrk/hangman",
+    link: null,
     stack: ["Python"],
     fr: {
       title: "Hangman",
@@ -330,24 +330,24 @@ export const education = [
     logo: `${P}/epitech.png`,
     href: "https://www.epitech.eu/",
     name: "Epitech",
-    fr: { period: "2025 — 2028", detail: "Pré-MSc & Master of Science" },
-    en: { period: "2025 — 2028", detail: "Pre-MSc & Master of Science" },
+    fr: { period: "2025 › 2028", detail: "Pré-MSc & Master of Science" },
+    en: { period: "2025 › 2028", detail: "Pre-MSc & Master of Science" },
   },
   {
     id: "g4",
     logo: `${P}/g4.png`,
     href: "https://institut-g4.fr/",
     name: "Institut G4",
-    fr: { period: "2023 — 2025", detail: "Bachelor Informatique, L2 & L3" },
-    en: { period: "2023 — 2025", detail: "BSc Computer Science, years 2 & 3" },
+    fr: { period: "2023 › 2025", detail: "Bachelor Informatique, L2 & L3" },
+    en: { period: "2023 › 2025", detail: "BSc Computer Science, years 2 & 3" },
   },
   {
     id: "montpellier",
     logo: `${P}/montpellier.png`,
     href: "https://www.umontpellier.fr/",
     name: "Université de Montpellier",
-    fr: { period: "2022 — 2023", detail: "L1 Informatique" },
-    en: { period: "2022 — 2023", detail: "Computer Science, year 1" },
+    fr: { period: "2022 › 2023", detail: "L1 Informatique" },
+    en: { period: "2022 › 2023", detail: "Computer Science, year 1" },
   },
 ];
 
@@ -358,13 +358,13 @@ export const experience = [
     href: "https://www.majoli.io/",
     name: "Majoli",
     fr: {
-      role: "Développeuse web — alternance",
-      period: "2025 — aujourd'hui",
+      role: "Développeuse web en alternance",
+      period: "2023 › aujourd'hui",
       detail: "Développement React & no-code, automatisation IA, gestion de projet",
     },
     en: {
-      role: "Web developer — apprenticeship",
-      period: "2025 — present",
+      role: "Web developer, apprenticeship",
+      period: "2023 › now",
       detail: "React & no-code development, AI automation, project management",
     },
   },
@@ -374,13 +374,13 @@ export const experience = [
     href: "https://wearejolies.com/",
     name: "We Are Jolies",
     fr: {
-      role: "Cheffe de projet web — alternance",
-      period: "2023 — 2025",
+      role: "Cheffe de projet web en alternance",
+      period: "2024 › 2025",
       detail: "Maintenance web, analyse KPI, automatisation, data analyse",
     },
     en: {
-      role: "Web project manager — apprenticeship",
-      period: "2023 — 2025",
+      role: "Web project manager, apprenticeship",
+      period: "2024 › 2025",
       detail: "Web maintenance, KPI analysis, automation, data analysis",
     },
   },
@@ -429,17 +429,18 @@ export const skillGroups = [
 ];
 
 export const personal = [
-  { id: "bac", img: `${P}/bac.png`, fr: "Bac général — Maths, Physique-Chimie, NSI.", en: "French baccalauréat — Maths, Physics-Chemistry, Computer Science." },
-  { id: "theatre", img: `${P}/theatre.png`, fr: "6 ans de théâtre. Parler devant une salle ne me fait plus peur — présenter une analyse non plus.", en: "6 years of theatre. Speaking to a room doesn't scare me — and neither does presenting an analysis." },
+  { id: "bac", img: `${P}/bac.png`, fr: "Bac général : Maths, Physique-Chimie, NSI.", en: "French baccalauréat: Maths, Physics-Chemistry, Computer Science." },
+  { id: "theatre", img: `${P}/theatre.png`, fr: "6 ans de théâtre. Parler devant une salle ne me fait plus peur, présenter une analyse non plus.", en: "6 years of theatre. Speaking to a room doesn't scare me, and neither does presenting an analysis." },
   { id: "chant", img: `${P}/chant.png`, fr: "7 ans de chant, entre Tunis et la France.", en: "7 years of singing, between Tunis and France." },
-  { id: "cuisine", img: `${P}/chef.png`, fr: "Je cuisine pour mes proches dès que j'ai une soirée libre.", en: "I cook for the people close to me whenever I have a free evening." },
+  { id: "sport", img: `${P}/sport.svg`, fr: "Je vais à la salle de sport pour ma santé, pour la discipline, et pour une meilleure version de moi-même.", en: "I go to the gym for my health, for the discipline, and for a better version of myself." },
 ];
 
 export const ui = {
   fr: {
-    role: "Analyste de données",
+    role: "Étudiante en informatique · direction data",
     heroLead:
-      "Je viens du développement web, je vais vers la data. Ce qui m'intéresse n'est pas le graphique — c'est la décision qu'il permet de prendre.",
+      "Je viens du développement web, je vais vers la data. Ce qui m'intéresse n'est pas le graphique, c'est la décision qu'il permet de prendre.",
+    availability: "Je suis en formation en alternance dans la tech, le digital et l'informatique. Ouverte aux contrats d'apprentissage ou de professionnalisation, aux stages alternés, comme aux CDD ou CDI à temps partiel.",
     heroBefore: "Je transforme des données en",
     heroRotating: ["décisions", "histoire", "cap", "évidence"],
     heroCtaWork: "Voir mes projets",
@@ -457,6 +458,7 @@ export const ui = {
     prev: "Projet précédent",
     next: "Projet suivant",
     projectCount: "projets",
+    workNote: "Je travaille encore aujourd'hui, et tous mes projets professionnels ne sont pas ici : certains restent internes ou sous accord de confidentialité.",
     dragHint: "Faites glisser, ou utilisez les flèches du clavier",
     close: "Fermer",
     liveSite: "Voir le site",
@@ -477,9 +479,10 @@ export const ui = {
     comingSoon: "Bientôt",
   },
   en: {
-    role: "Data Analyst",
+    role: "Computer science student · heading into data",
     heroLead:
-      "I come from web development, I'm heading into data. What interests me isn't the chart — it's the decision it makes possible.",
+      "I come from web development, I'm heading into data. What interests me isn't the chart, it's the decision it makes possible.",
+    availability: "I am training through an apprenticeship in tech, digital and computer science. Open to apprenticeship or professional-training contracts, alternating internships, as well as part-time fixed-term or permanent roles.",
     heroBefore: "I turn data into",
     heroRotating: ["decisions", "a story", "a direction", "clarity"],
     heroCtaWork: "See my work",
@@ -497,6 +500,7 @@ export const ui = {
     prev: "Previous project",
     next: "Next project",
     projectCount: "projects",
+    workNote: "I am still working today, and not all of my professional projects are here: some stay internal or under a confidentiality agreement.",
     dragHint: "Drag, or use the arrow keys",
     close: "Close",
     liveSite: "Visit site",

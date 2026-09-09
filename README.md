@@ -26,10 +26,11 @@ src/
 ├── hooks/useInView.js    # détection d'entrée / sortie d'écran
 ├── components/
 │   ├── Nav.js            # navigation fixe + bascule FR/EN
-│   ├── FrameNav.js       # pastilles latérales, un point par écran
+│   ├── FrameNav.js       # étoiles latérales, une par écran
+│   ├── StarField.js      # étoiles discrètes semées sur toute la page
 │   ├── Hero.js           # formes organiques, bulles, mot tournant
 │   ├── About.js          # parcours, formation, compétences — un écran
-│   ├── Projects.js       # filtres + rail horizontal de tous les projets
+│   ├── Projects.js       # filtres + sommaire + fiche affichée sur place
 │   ├── ProjectCover.js   # motif généré pour les projets sans capture
 │   ├── ProjectModal.js   # fiche projet détaillée
 │   ├── MiniChart.js      # barres horizontales animées
@@ -85,9 +86,13 @@ Quand un écran entre dans le viewport, `useInView` lui pose la classe
 `is-live` et ses blocs montent l'un après l'autre (`App.css`). L'état retombe
 à la sortie, donc l'animation rejoue si l'on revient en arrière.
 
-Les onze projets tiennent dans un seul écran grâce à un rail horizontal
-accrocheur (`scroll-snap-type: x`), piloté à la souris, au doigt, aux flèches
-du clavier ou aux boutons. Les filtres de catégorie sont dans le même écran.
+Les onze projets tiennent dans un seul écran : un sommaire numéroté à gauche,
+la fiche complète à droite. Survoler ou cliquer une ligne change la fiche sur
+place, les flèches haut et bas parcourent la liste. Aucune fenêtre ne s'ouvre
+par-dessus la page, et les filtres de catégorie restent dans le même écran.
+
+`justify-content: safe center` est important : sur un écran bas, le contenu
+s'aligne en haut au lieu d'être rogné sous la barre de navigation.
 
 ## Choix de conception
 
@@ -100,12 +105,17 @@ du clavier ou aux boutons. Les filtres de catégorie sont dans le même écran.
 - **Pas de capture d'écran pour les projets data.** Un projet d'analyse se
   montre par ses chiffres et son résultat, pas par une image de notebook :
   `ProjectCover.js` dessine un motif à la place.
-- **Tout est sélectionnable.** Aucun `user-select: none`, chaque carte est un
-  bouton, chaque ligne de parcours un lien, chaque écran atteignable par les
-  pastilles latérales.
+- **Tout est sélectionnable.** Aucun `user-select: none`, chaque ligne du
+  sommaire est un bouton, chaque ligne de parcours un lien, chaque écran
+  atteignable par les étoiles latérales.
+- **Pas de fenêtre modale.** Le détail d'un projet s'affiche dans l'écran,
+  jamais par-dessus.
+- **Pas de tiret cadratin.** Un test le vérifie sur le rendu complet.
 
 ## À faire
 
+- [ ] Ajouter les visuels manquants des projets web dans `public/`, puis
+      renseigner leur champ `image` dans `data/content.js`.
 - [ ] Remplacer la capture de **CogSpace** : le visuel actuel est une photo
       d'un document texte, illisible en vignette.
 - [ ] Mettre à jour `public/CVCyrine.pdf`, qui date d'avant le virage data.
